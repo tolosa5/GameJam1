@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Enemy_square : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private float _speed = 5f;
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        Vector2 newWay = new Vector2(transform.position.x - 1, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, newWay, _speed * Time.deltaTime);
     }
 }
