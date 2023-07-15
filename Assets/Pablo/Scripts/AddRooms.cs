@@ -8,7 +8,10 @@ public class AddRooms : MonoBehaviour
 
     void Start()
     {
+        
         Manager.manager.GeneratedRooms.Add(this.gameObject);
+        transform.parent = Manager.manager.posStartGeneration.transform;
+
     }
 
 
