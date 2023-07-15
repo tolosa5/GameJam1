@@ -1,29 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Parallax_Eze : MonoBehaviour
 {
-    private float lenght, startpos;
-    public GameObject cam;
-    public float parallazEffect;
+    [SerializeField] float moveSpeed;
+    [SerializeField] bool scrollLeft;
 
-    void Start()
+    float singleTextureWidth;
+
+private void Start ()
+{
+    SetupTexture();
+    if(scrollLeft) moveSpeed = -moveSpeed;
+}
+
+void SetupTexture()
+{
+    Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+    singleTextureWidth = sprite.texture.width / sprite.pixelsPerUnit;
+}
+
+private void Scroll()
+{ 
+float delta = moveSpeed * Time.deltaTime;
+    transform.position += new Vector3(delta, 0f, 0f);
+}
+
+void CheckReset()
     {
-        startpos = transform.position.x;
-        lenght = GetComponent<SpriteRenderer>().bounds.size.x;
+        if ((Mathf.Abs(transform.position.x) - singleTextureWidth) > 0)
+        {
+            transform.position = new Vector3(0.0f, transform.position.y, transform.position.z);
+        }
     }
-
-    void FixedUpdate()
+    private void Update()
     {
-        float temp = (cam.transform.transform.position.x * (1 - parallazEffect));
-        float dist = (cam.transform.position.x * parallazEffect);
-
-        transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
-
-        if (temp > startpos + lenght) startpos += lenght;
-        else if (temp < startpos - lenght) startpos -= lenght;
-
+        Scroll();
+        CheckReset();
     }
-
 }
