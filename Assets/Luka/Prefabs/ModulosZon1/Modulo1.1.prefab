@@ -997,7 +997,7 @@ GameObject:
   - component: {fileID: 4914075445721130125}
   - component: {fileID: 4567422658593175503}
   - component: {fileID: 3588534032806774265}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilebase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
