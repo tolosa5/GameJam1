@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpawnPoint
-  - Bullet
+  - Portal
   layers:
   - Default
   - TransparentFX

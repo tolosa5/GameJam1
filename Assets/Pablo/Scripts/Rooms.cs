@@ -4,45 +4,64 @@ using UnityEngine;
 
 public class Rooms : MonoBehaviour
 {
-    public static Rooms roomManager;
 
-    
-    public List<GameObject> lvlOne = new List<GameObject>();
-    public List<GameObject> lvlTwo = new List<GameObject>();
-    public List<GameObject> lvlThree = new List<GameObject>();
-
-    public List<GameObject> GeneratedRooms = new List<GameObject>();
     public int openSide;
     private int rand;
     private bool spawned = false;
-    public int limiteRooms = 3;
-
 
 
     private void Awake()
     {
-        if (roomManager == null)
-        {
-            roomManager = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
 
-        DontDestroyOnLoad(roomManager);
+    }
 
+    void Start()
+    {
         Invoke("Spawn", 0.1f);
     }
 
+   
     public void Spawn()
     {
-        if(!spawned && GeneratedRooms.Count <= limiteRooms)
+        if(!spawned && Manager.manager.GeneratedRooms.Count <= Manager.manager.limiteRooms)
         {
-            
-            
+            switch (Manager.manager.actualLevel)
+            {
+                default:
+                case 1:
+                Debug.Log("Nivel 1 Etapa2");
+                if (openSide == 1)
+                {
+                    Debug.Log("Generamos Habitacion");
+                    rand = Random.Range(0, Manager.manager.lvlOne.Count);
+                    Instantiate(Manager.manager.lvlOne[rand], transform.position, Manager.manager.lvlOne[rand].transform.rotation);
+                    Manager.manager.lvlOne.RemoveAt(rand);
+                }
+
+                    break;
+
+                case 2:
+                Debug.Log("Nivel 2 Etapa2");
 
 
+                    break;
+
+                case 3:
+                Debug.Log("Nivel 3 Etapa2");
+
+
+                    break;
+
+
+
+            }
+
+            if (Manager.manager.GeneratedRooms.Count == Manager.manager.limiteRooms)
+            {
+                Instantiate(Manager.manager.goPortal, transform.position + new Vector3(8,-2f,0), Manager.manager.goPortal.transform.rotation);
+            }
+        
+            spawned = true;
         }
 
 
@@ -65,8 +84,30 @@ public class Rooms : MonoBehaviour
     }
 
 
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        /*
+        if (other.CompareTag("SpawnPoint"))
+        {
+            try
+            {
+                if (other.GetComponent<Rooms>().spawned == false && spawned == false)
+                {
+                    Instantiate(Manager.manager.lvlOne[rand], transform.position, Manager.manager.lvlOne[rand].transform.rotation);
+                    Destroy(gameObject);
+                }
+                spawned = true;
+            }
+            catch (System.Exception)
+            {
+                Debug.Log("No hay nada que destruir");
+            }
+        }
+
+
+
         /*
         if (other.CompareTag("SpawnPoint"))
         {
