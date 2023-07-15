@@ -71,6 +71,7 @@ public class Manager : MonoBehaviour
                 Debug.Log("Nivel 2");
                 rand = Random.Range(0, lvlTwo.Count);
                 Instantiate(lvlTwo[rand], transform.position, lvlTwo[rand].transform.rotation);
+                lvlTwo.RemoveAt(rand);
 
                 break;
 
@@ -78,7 +79,7 @@ public class Manager : MonoBehaviour
                 Debug.Log("Nivel 3");
                 rand = Random.Range(0, lvlThree.Count);
                 Instantiate(lvlThree[rand], transform.position, lvlThree[rand].transform.rotation);
-                ;
+                lvlThree.RemoveAt(rand);
                 break;
         }
 
@@ -106,9 +107,8 @@ public class Manager : MonoBehaviour
 
     public void ScoreTime()
     {
-        Debug.Log("Hola");
+        
         scorePoints += Time.deltaTime * 10;
-        Debug.Log("Score: " + scorePoints);
 
     }
 
