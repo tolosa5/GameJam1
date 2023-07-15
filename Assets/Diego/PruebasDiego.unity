@@ -418,10 +418,6 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 75101655}
-    - target: {fileID: 7546215344358479980, guid: 96646ea957b8b6c4390202c8f3cecbc6, type: 3}
-      propertyPath: orthographic size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7546215344358479981, guid: 96646ea957b8b6c4390202c8f3cecbc6, type: 3}
       propertyPath: m_RootOrder
       value: 0

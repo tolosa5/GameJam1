@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
     float h; //Inputs
 
     Rigidbody2D rb;
-    Sprite playerSprite;
     SpriteRenderer sR;
+    [SerializeField] Sprite[] playerSprites;
 
     #region Jump
 
@@ -158,6 +158,7 @@ public class Player : MonoBehaviour
 
     IEnumerator BackShoot()
     {
+        Debug.Log("disparopatra");
         sR.flipX = true;
         yield return new WaitForSeconds(.2f);
         Instantiate(bullets, transform.position + Vector3.left * 1.5f, Quaternion.identity);
