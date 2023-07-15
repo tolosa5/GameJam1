@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public enum State {Fase1, Fase2}
+    public State currentState;
+
+    #region Jump
+
     [SerializeField] float jumpForce;
-    [SerializeField] float characterVelocity;
-
-    [SerializeField] Transform playerFeet;
+    
+    bool isJumping;
+    bool isGrounded;
     [SerializeField] LayerMask isGround;
+    [SerializeField] Transform playerFeet;
 
-    bool jump;
+    #endregion
 
     float h,v; //Inputs
 
@@ -21,10 +27,21 @@ public class Player : MonoBehaviour
     #region Disparos
 
     float lastShoot;
-    float fireRate = 1f;
+    [SerializeField] float fireRate;
 
     [SerializeField] GameObject bullets; 
     [SerializeField] Sprite[] bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
+
+    #endregion
+
+    #region Dash
+
+    float dashCooldown;
+    [SerializeField] float dashForce;
+
+    bool ableToDash = true;
+    bool isDashing;
+    bool dashed;
 
     #endregion
 
@@ -34,40 +51,72 @@ public class Player : MonoBehaviour
         sR = GetComponent<SpriteRenderer>();
     }
 
-    private void FixedUpdate()
-    {
-        if (jump)
-        {
-            Debug.Log("input salto");
-
-            if (Physics2D.OverlapCircle(playerFeet.position, 0.1f, isGround))
-            {
-                Debug.Log("salto");
-                Jump();
-            }
-            jump = false;
-        }
-    }
-
     private void Update()
     {
+        Debug.Log(dashCooldown);
+        switch(currentState)
+        {
+            
+            case State.Fase1:
+
+            default:
+            case State.Fase2:
+                #region Dash
+                if (isDashing)
+                {
+                    Debug.Log("dashing");
+                    dashCooldown += Time.deltaTime;
+                    if (!dashed)
+                    {
+                        dashed = true;
+                        rb.AddForce(Vector2.right * dashForce, ForceMode2D.Impulse);
+                    }
+                    else if (dashCooldown >= 2f)
+                    {
+                        isDashing = false;
+                        dashed = false;
+                        dashCooldown = 0;
+                    }
+                }
+
+                #endregion
+
+
+                break;
+        }
+        #region JumpCall
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jump = true;
+            Debug.Log("salto normal");
+            isJumping = true;
+            Jump();
         }
+        #endregion
 
+        #region FireCall
         lastShoot += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.F) && lastShoot >= fireRate)
             Shoot();
+        #endregion
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing)
+            isDashing = true;
     }
 
     void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+        isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, isGround);
+        if (isGrounded)
+        {
+            Debug.Log("salto");
+            rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     void Shoot()
     {
-        Instantiate(bullets, transform.position + Vector3.right * 0.7f, Quaternion.identity);
+        Instantiate(bullets, transform.position + Vector3.right * 1f, Quaternion.identity);
+        lastShoot = 0;
     }
 }
