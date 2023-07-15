@@ -105,6 +105,12 @@ public class Manager : MonoBehaviour
 
     }
 
+    public void EndGame()
+    {
+
+        
+    }
+
     public void ScoreTime()
     {
         

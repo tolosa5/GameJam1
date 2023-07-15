@@ -9,6 +9,8 @@ public class Loading : MonoBehaviour
 
    // [SerializeField] private Slider sliderLoading;
     public Button btnReadyToPlay;
+    public GameObject nivel1;
+    public GameObject nivel2;
     AsyncOperation operation;
 
     private bool loaded = false;
@@ -21,6 +23,25 @@ public class Loading : MonoBehaviour
         {
             operation.allowSceneActivation = true;
         });
+
+        switch(LoadLvL)
+        {
+            default:
+            case "Nivel1":
+
+                nivel1.SetActive(true);
+
+                break;
+            
+            case "Nivel2":
+
+                nivel2.SetActive(true);
+
+
+
+                break;
+
+        }
     }
 
     IEnumerator StartLoad(string NextScene)
