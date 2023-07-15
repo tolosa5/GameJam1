@@ -8,7 +8,7 @@ public class DoubleJump : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Player.player.DoubleJump();
+            Player.player.DoubleJumpActivator();
         }
     }
 }
