@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     SpriteRenderer sR;
     [SerializeField] Sprite[] playerSprites;
 
+    Queue<KeyCode> inputBuffer;
+
     #region Jump
 
     [SerializeField] float jumpForce;
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
+
     private void Awake()
     {
         if (player != null)
@@ -79,6 +82,8 @@ public class Player : MonoBehaviour
         sR = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
 
+        inputBuffer = new Queue<KeyCode>();
+
         Gravity = rb.gravityScale;
     }
 
@@ -87,13 +92,16 @@ public class Player : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal");
 
         CollisionDetection();
+        Jump();
 
         #region JumpCall
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isJumping = true;
-            Jump();
+            inputBuffer.Enqueue(KeyCode.Space);
+
+            Invoke("EraseAction", 0.5f);
+            //isJumping = true;
         }
         #endregion
 
@@ -129,25 +137,30 @@ public class Player : MonoBehaviour
 
                 break;
         }
-
-
-        /*
-        #region DashCall
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing)
-            isDashing = true;
-        #endregion
-        */
     }
-
     void Jump()
     {
         isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, isGround);
+
         if (isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            if (inputBuffer.Count > 0)
+            {
+                if (inputBuffer.Peek() == KeyCode.Space)
+                {
+                    rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+
+                    inputBuffer.Dequeue();
+                }
+            }
         }
     }
+
+    void EraseAction()
+    {
+        inputBuffer.Dequeue();
+    }
+
 
     void Shoot()
     {
