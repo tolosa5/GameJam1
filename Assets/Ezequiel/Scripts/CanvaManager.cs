@@ -21,16 +21,17 @@ public class CanvaManager : MonoBehaviour
 
     public void MenuReturn()
     {
-        SceneManager.LoadScene("MenuReturn");
+        SceneLoad.LoadScene("Menu");
     }
 
     public void RetryLevel()
     {
-        SceneManager.LoadScene("Nivel1");
+        SceneLoad.LoadScene("Nivel1");
     }
 
     public void Pause()
     {
+        Debug.Log("Pause");
         Time.timeScale = 0;
         //gameObject.SetActive(true);
 
@@ -39,6 +40,7 @@ public class CanvaManager : MonoBehaviour
     public void Continue()
     {
         //gameObject.SetActive(false);
+        Debug.Log("Resume");
         Time.timeScale = 1;
 
     }
