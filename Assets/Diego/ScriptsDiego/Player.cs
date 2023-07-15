@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
     public State currentState;
     public static Player player;
 
+    float h; //Inputs
+
+    Rigidbody2D rb;
+    Sprite playerSprite;
+    SpriteRenderer sR;
+
     #region Jump
 
     [SerializeField] float jumpForce;
@@ -19,27 +25,26 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    float h; //Inputs
 
-    Rigidbody2D rb;
-    Sprite playerSprite;
-    SpriteRenderer sR;
-
-    Vector3 ProyectGravity;
 
     #region Disparos
 
     float lastShoot;
     [SerializeField] float fireRate;
 
-    [SerializeField] GameObject bullets; 
+    [SerializeField] GameObject bullets;
     [SerializeField] Sprite[] bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
 
     #endregion
 
     #region Dash
 
-    float dashCooldown = 0.5f;
+    float Gravity;
+
+    TrailRenderer tr;
+
+    [SerializeField] float dashCooldown = 2f;
+    [SerializeField] float dashTime = 0.2f;
     [SerializeField] float dashForce;
 
     bool ableToDash = true;
@@ -74,58 +79,17 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sR = GetComponent<SpriteRenderer>();
+        tr = GetComponent<TrailRenderer>();
 
-        ProyectGravity = Physics.gravity;
+        Gravity = rb.gravityScale;
     }
 
     private void Update()
     {
         h = Input.GetAxisRaw("Horizontal");
+
         CollisionDetection();
-        Debug.Log(dashCooldown);
-        switch(currentState)
-        {
-            case State.Fase1:
 
-            default:
-            case State.Fase2:
-                #region Dash
-                Dash();
-                if (isDashing)
-                {
-                    #region Dash1
-                    /*
-                    rb.velocity = new Vector3(rb.velocity.x, 0);
-                    Debug.Log("dashing");
-                    dashCooldown += Time.deltaTime;
-
-                    if (!dashed)
-                    {
-                        dashed = true;
-                        rb.AddForce(Vector2.right * dashForce, ForceMode2D.Impulse);
-                    }
-                    if (dashCooldown < 0.5f)
-                    {
-                        Physics.gravity = Vector3.zero;
-                    }
-                    else if (dashCooldown >= 0.5f && dashCooldown < 2f)
-                    {
-                        Physics.gravity = ProyectGravity;
-                    }
-                    else if (dashCooldown >= 2f)
-                    {
-                        isDashing = false;
-                        dashed = false;
-                        dashCooldown = 0;
-                    }
-                    */
-                    #endregion
-                    
-                }
-                #endregion
-
-                break;
-        }
         #region JumpCall
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -138,16 +102,43 @@ public class Player : MonoBehaviour
         #region FireCall
 
         lastShoot += Time.deltaTime;
-        //Debug.Log(lastShoot);
+        
         if (Input.GetKeyDown(KeyCode.F) && lastShoot >= fireRate)
             Shoot();
+
         #endregion
 
+        Debug.Log(dashCooldown);
+        switch(currentState)
+        {
+            case State.Fase1:
+
+            default:
+            case State.Fase2:
+                #region Dash
+                if (ableToDash && h != 0)
+                {
+                    StartCoroutine(Dash());
+                }
+                #endregion
+
+                #region BackFireCall
+
+                if (Input.GetKeyDown(KeyCode.Q) && lastShoot >= fireRate)
+                    BackShoot();
+                #endregion
+
+                break;
+        }
+
+
+        /*
         #region DashCall
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing)
             isDashing = true;
         #endregion
+        */
     }
 
     void Jump()
@@ -161,29 +152,36 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullets, transform.position + Vector3.right * 1f, Quaternion.identity);
+        Instantiate(bullets, transform.position + Vector3.right * 1.5f, Quaternion.identity);
         lastShoot = 0;
     }
 
-    void Dash()
+    IEnumerator BackShoot()
     {
-        if (h != 0 && ableToDash)
-        {
-            ableToDash = false;
-            isDashing = true;
-            dashDir = new Vector3(h, 0);
+        sR.flipX = true;
+        yield return new WaitForSeconds(.2f);
+        Instantiate(bullets, transform.position + Vector3.left * 1.5f, Quaternion.identity);
+        lastShoot = 0;
+        yield return new WaitForSeconds(.2f);
+        sR.flipX = false;
+    }
 
-            if (dashDir == Vector3.zero)
-            {
-                dashDir = new Vector3(transform.localScale.x, 0);
-            }
-        }
+    IEnumerator Dash()
+    {
+        ableToDash = false;
+        isDashing = true;
+        rb.gravityScale = 0f;
+        tr.emitting = true;
 
-        StartCoroutine(StopDash());
-        if (isDashing)
-        {
-            rb.velocity = dashDir.normalized * dashForce;
-        }
+        rb.velocity = new Vector3(h * dashForce, 0f);
+
+        yield return new WaitForSeconds(dashTime);
+        tr.emitting = false;
+        rb.gravityScale = Gravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        ableToDash = true;
     }
 
     public bool CollisionDetection()
@@ -192,14 +190,8 @@ public class Player : MonoBehaviour
         return activado;
     }
 
-    IEnumerator StopDash()
-    {
-        yield return new WaitForSeconds(dashCooldown);
-        isDashing = false;
-    }
-
     public void Death()
     {
-
+        //si se mueve 11 bloques a la izquierda se ha muerto
     }
 }
