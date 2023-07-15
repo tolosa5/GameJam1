@@ -97,6 +97,10 @@ public class Player : MonoBehaviour
         CollisionDetection();
         Jump();
         CoyoteCheck();
+        if (CollisionDetection())
+        {
+
+        }
 
         #region JumpCall
 
@@ -231,7 +235,7 @@ public class Player : MonoBehaviour
         return activado;
     }
 
-    public void DoubleJump()
+    public void DoubleJumpActivator()
     {
 
     }
@@ -246,7 +250,7 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
-        //canvas de la muerte
+        //Manager.manager.EndGame;
 
         //si se mueve 11 bloques a la izquierda se ha muerto
     }
