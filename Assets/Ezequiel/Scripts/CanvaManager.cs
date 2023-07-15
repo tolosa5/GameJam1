@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CanvaManager : MonoBehaviour
 {
     //[SerializeField] private Image menuPause;
-    public int[] selecScena;
+    //public int[] selecScena;
 
     void Start()
     {
