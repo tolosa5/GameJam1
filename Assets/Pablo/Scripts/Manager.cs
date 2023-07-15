@@ -23,6 +23,8 @@ public class Manager : MonoBehaviour
 
     private int rand;
 
+    public float scorePoints;
+
 
     private void Awake()
     {
@@ -48,6 +50,7 @@ public class Manager : MonoBehaviour
     private void Update()
     {
         WorldMovement();
+        ScoreTime();
     }
 
 
@@ -98,6 +101,14 @@ public class Manager : MonoBehaviour
         {
             posStartGeneration.transform.Translate(new Vector3(-worldSpeed,0,0) * Time.deltaTime);
         }
+
+    }
+
+    public void ScoreTime()
+    {
+        Debug.Log("Hola");
+        scorePoints += Time.deltaTime * 10;
+        Debug.Log("Score: " + scorePoints);
 
     }
 

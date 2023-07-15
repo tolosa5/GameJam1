@@ -164,8 +164,8 @@ GameObject:
   m_Component:
   - component: {fileID: 418350756}
   - component: {fileID: 418350755}
-  - component: {fileID: 418350754}
   - component: {fileID: 418350757}
+  - component: {fileID: 418350754}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -317,14 +317,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lvlOne:
-  - {fileID: 2535270816231728823, guid: bdfb84e489962e147affc6adcf5da8e8, type: 3}
-  - {fileID: 7425248241933546581, guid: 20114e8dc772b6640a784a0cf7b625a7, type: 3}
-  - {fileID: 2809966178388596903, guid: acd775345685e7248bcb442a650b1478, type: 3}
-  - {fileID: 1171412028885244827, guid: 39ab32a6c292dd3408029b766c917fe5, type: 3}
-  - {fileID: 7870730460327941509, guid: 3b233d69864fdeb41a6155c1638f7fd1, type: 3}
-  - {fileID: 5632405014782963862, guid: 9dba14dd0d5024b4395423b2e799a978, type: 3}
-  - {fileID: 305858507436772755, guid: b31bf3907633c9e4abc8975945e1f99e, type: 3}
-  - {fileID: 394323377626918170, guid: 54a59d1fee5dcb84ebfee97a8f325874, type: 3}
+  - {fileID: 2535270816231728823, guid: 7b9e5fd83b931eb4a8dd5dbf6a3834f3, type: 3}
+  - {fileID: 2535270816231728823, guid: 74d54ea2d0381d140b8aaf0aa4029a86, type: 3}
+  - {fileID: 2535270816231728823, guid: 253eefb49d3facb43a9c76563316c5a5, type: 3}
+  - {fileID: 2535270816231728823, guid: 20b176b7a2e7070449e6cc973fa4d216, type: 3}
+  - {fileID: 2535270816231728823, guid: e19a1b668309df444b0022be44981cec, type: 3}
+  - {fileID: 2535270816231728823, guid: 0e79108d778459d46b85272b4f63cd28, type: 3}
+  - {fileID: 2535270816231728823, guid: 97fdd106e69bd39488ed6b31efaca2a7, type: 3}
+  - {fileID: 2535270816231728823, guid: 0a4990afe3db10c4396f9c9595bad43a, type: 3}
   lvlTwo:
   - {fileID: 5657374240461192161, guid: e95534373ad4f35488b94620a3977b05, type: 3}
   - {fileID: 6586142535841504220, guid: ca6e22c2d3e61ca479e6a1f2b59b8ee2, type: 3}
@@ -425,7 +425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419548549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.9, z: 0}
+  m_LocalPosition: {x: -45, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
