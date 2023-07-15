@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
 
             default:
             case State.Fase2:
+
                 #region Dash
                 if (ableToDash && h != 0)
                 {
@@ -125,7 +126,7 @@ public class Player : MonoBehaviour
                 #region BackFireCall
 
                 if (Input.GetKeyDown(KeyCode.Q) && lastShoot >= fireRate)
-                    BackShoot();
+                    StartCoroutine(BackShoot());
                 #endregion
 
                 break;
