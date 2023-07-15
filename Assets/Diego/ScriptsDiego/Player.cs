@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public State currentState;
     public static Player player;
 
+    Vector3 myPosition;
+
     float h; //Inputs
 
     Rigidbody2D rb;
@@ -65,6 +67,8 @@ public class Player : MonoBehaviour
     [SerializeField] Transform checker;
     [SerializeField] float checkerSize;
 
+    bool collisionActivated;
+
     bool beingDragged;
     float timeDragged;
 
@@ -104,7 +108,20 @@ public class Player : MonoBehaviour
         CoyoteCheck();
         if (CollisionDetection())
         {
-
+            if (!collisionActivated)
+            {
+                collisionActivated = true;
+                myPosition = transform.position;
+            }
+            if (Vector3.Distance(myPosition, transform.position) >= 12)
+            {
+                Death();
+            }
+            else
+            {
+                //myPosition = Vector3.zero;
+                collisionActivated = false;
+            }
         }
 
         #region JumpCall
@@ -185,6 +202,7 @@ public class Player : MonoBehaviour
         if (isGrounded)
         {
             coyoteTime = 0;
+            coyoteActivated = false;
         }
         else
         {
