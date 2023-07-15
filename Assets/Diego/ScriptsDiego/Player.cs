@@ -63,6 +63,9 @@ public class Player : MonoBehaviour
     [SerializeField] Transform checker;
     [SerializeField] float checkerSize;
 
+    bool beingDragged;
+    float timeDragged;
+
     #endregion
 
 
