@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
             default:
             case State.Fase2:
                 #region Dash
-
+                Dash();
                 if (isDashing)
                 {
                     #region Dash1
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
                     }
                     */
                     #endregion
-
+                    
                     
                 }
                 #endregion
@@ -108,7 +108,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("salto normal");
             isJumping = true;
             Jump();
         }
@@ -117,7 +116,7 @@ public class Player : MonoBehaviour
         #region FireCall
 
         lastShoot += Time.deltaTime;
-        Debug.Log(lastShoot);
+        //Debug.Log(lastShoot);
         if (Input.GetKeyDown(KeyCode.F) && lastShoot >= fireRate)
             Shoot();
         #endregion
@@ -134,7 +133,6 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, isGround);
         if (isGrounded)
         {
-            Debug.Log("salto");
             rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -147,15 +145,9 @@ public class Player : MonoBehaviour
 
     void Dash()
     {
-        switch (h)
+        if (h != 0)
         {
-            default:
-            case 1:
-
-
-            case -1:
-
-            break;
+            rb.velocity = new Vector3((h * dashForce) * Time.deltaTime, 0);
         }
     }
 }
