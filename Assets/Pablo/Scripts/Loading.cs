@@ -7,33 +7,47 @@ using UnityEngine.UI;
 public class Loading : MonoBehaviour
 {
 
-   // [SerializeField] private Slider sliderLoading;
+    //[SerializeField] private Slider sliderLoading;
+    
+    public Button btnReadyToPlay;
+    private AsyncOperation operation;
+    private bool loaded = false;
+
     private void Start()
     {
         string LoadLvL = SceneLoad.nextLVL;
         StartCoroutine(StartLoad(LoadLvL));
+        btnReadyToPlay.onClick.AddListener(delegate
+        {
+            if(loaded)
+            {
+                operation.allowSceneActivation = true;
+            }
+
+        });
     }
 
     IEnumerator StartLoad(string NextScene)
     {
         yield return new WaitForSeconds(1f); //De momento esto para que dure la pantalla de carga
         
-        AsyncOperation operation = SceneManager.LoadSceneAsync(NextScene);
+        operation = SceneManager.LoadSceneAsync(NextScene);
         
         operation.allowSceneActivation = false;
 
         while (!operation.isDone)
         {
-            /*
-            float progreso = Mathf.Clamp01(operation.progress / 3f);  //Falseamos la carga de escena, haciendo que carga la escena pero solo una parte del slider
-            sliderLoading.value = progreso;
-            SceneLoadi.valueLoadingSlider = progreso;
-            */
+
             if (operation.progress >= 0.9f)
             {
-                operation.allowSceneActivation = true;
+                btnReadyToPlay.gameObject.SetActive(true);
+                loaded = true;
             }
+
             yield return null;
         }
     }
+
+
+
 }
