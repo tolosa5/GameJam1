@@ -8,7 +8,11 @@ public class CameraPlayer : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(playerTransform.position.x 
-            + 4, transform.position.y, transform.position.z), 10 * Time.deltaTime);
+        if (!Player.player.CollisionDetection())
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(playerTransform.position.x 
+                + 4, transform.position.y, transform.position.z), 10 * Time.deltaTime);
+
+        }
     }
 }
