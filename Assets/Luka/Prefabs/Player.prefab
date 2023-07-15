@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 7214706900688392367}
   - component: {fileID: 7214706900688392365}
   - component: {fileID: 1968071745}
+  - component: {fileID: 1968071746}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -222,7 +223,7 @@ MonoBehaviour:
   bulletsSprite: []
   dashCooldown: 2
   dashTime: 0.2
-  dashForce: 15
+  dashForce: 12
   checker: {fileID: 1937457003}
   checkerSize: 0.1
 --- !u!96 &1968071745
@@ -333,3 +334,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!95 &1968071746
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7214706900688392354}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44031ab9542edb34caec69dc2a17262b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
