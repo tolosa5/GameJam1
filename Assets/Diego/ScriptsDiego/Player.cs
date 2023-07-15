@@ -22,11 +22,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] float jumpForce;
     float coyoteTime;
+    bool coyoteActivated;
     
     bool isJumping;
     bool isGrounded;
     [SerializeField] LayerMask isGround;
     [SerializeField] Transform playerFeet;
+    [SerializeField] float feetRadius;
 
     #endregion
 
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
             {
                 Invoke("EraseAction", 0.5f);
             }
-            //isJumping = true;
+
         }
         #endregion
 
@@ -154,7 +156,7 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.2f, isGround);
+        isGrounded = Physics2D.OverlapCircle(playerFeet.position, feetRadius, isGround);
 
         if (inputBuffer.Count > 0)
         {
@@ -168,8 +170,9 @@ public class Player : MonoBehaviour
                 }
                 else 
                 {
-                    if ((coyoteTime <= 0.25f))
+                    if ((coyoteTime <= 0.25f) && !coyoteActivated)
                     {
+                        coyoteActivated = true;
                         rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
                     }
                 }
