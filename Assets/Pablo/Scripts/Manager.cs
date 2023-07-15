@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Manager : MonoBehaviour
 
     public int limiteRooms = 3; 
     public int actualLevel = 1;   
+
+    public float worldSpeed = 1f;
+    public bool worldGenerated = false;
     public Transform posStartGeneration;
 
     private int rand;
@@ -35,10 +39,19 @@ public class Manager : MonoBehaviour
         #endregion
 
         OnStartLevel();
+
+
+        
     }
 
 
-    private void OnStartLevel()
+    private void Update()
+    {
+        WorldMovement();
+    }
+
+
+    public void OnStartLevel()
     {
         switch (actualLevel)
         {
@@ -48,36 +61,43 @@ public class Manager : MonoBehaviour
                 rand = Random.Range(0, lvlOne.Count);
                 Instantiate(lvlOne[rand], transform.position, lvlOne[rand].transform.rotation);
                 lvlOne.RemoveAt(rand);
-                //actualLevel++;
 
-                //Rooms.roomManager.Invoke("Spawn", 0.1f);
                 break;
 
             case 2:
                 Debug.Log("Nivel 2");
                 rand = Random.Range(0, lvlTwo.Count);
                 Instantiate(lvlTwo[rand], transform.position, lvlTwo[rand].transform.rotation);
-                // actualLevel++;
 
-                //  Rooms.roomManager.Invoke("Spawn", 0.1f);
                 break;
 
             case 3:
                 Debug.Log("Nivel 3");
                 rand = Random.Range(0, lvlThree.Count);
                 Instantiate(lvlThree[rand], transform.position, lvlThree[rand].transform.rotation);
-                // actualLevel++;
-
-                // Rooms.roomManager.Invoke("Spawn", 0.1f);
+                ;
                 break;
         }
 
 
     }
 
-    private void OnEndLevel()
+    public void OnEndLevel()
     {
+        Debug.Log("Cambio Escena");
+        GeneratedRooms.Clear();
+        SceneManager.LoadScene("Nivel2");
+       // OnStartLevel();
 
+    }
+
+
+    public void WorldMovement()
+    {
+        if(worldGenerated)
+        {
+            posStartGeneration.transform.Translate(new Vector3(-worldSpeed,0,0) * Time.deltaTime);
+        }
 
     }
 
