@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    float h,v; //Inputs
+    float h; //Inputs
 
     Rigidbody2D rb;
     Sprite playerSprite;
@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        h = Input.GetAxisRaw("Horizontal");
+
         Debug.Log(dashCooldown);
         switch(currentState)
         {
@@ -68,6 +70,8 @@ public class Player : MonoBehaviour
 
                 if (isDashing)
                 {
+                    #region Dash1
+                    /*
                     rb.velocity = new Vector3(rb.velocity.x, 0);
                     Debug.Log("dashing");
                     dashCooldown += Time.deltaTime;
@@ -91,6 +95,10 @@ public class Player : MonoBehaviour
                         dashed = false;
                         dashCooldown = 0;
                     }
+                    */
+                    #endregion
+
+                    
                 }
                 #endregion
 
@@ -135,5 +143,19 @@ public class Player : MonoBehaviour
     {
         Instantiate(bullets, transform.position + Vector3.right * 1f, Quaternion.identity);
         lastShoot = 0;
+    }
+
+    void Dash()
+    {
+        switch (h)
+        {
+            default:
+            case 1:
+
+
+            case -1:
+
+            break;
+        }
     }
 }
