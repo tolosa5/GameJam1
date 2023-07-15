@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     Sprite playerSprite;
     SpriteRenderer sR;
 
+    Vector3 ProyectGravity;
+
     #region Disparos
 
     float lastShoot;
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sR = GetComponent<SpriteRenderer>();
+
+        ProyectGravity = Physics.gravity;
     }
 
     private void Update()
@@ -56,20 +60,30 @@ public class Player : MonoBehaviour
         Debug.Log(dashCooldown);
         switch(currentState)
         {
-            
             case State.Fase1:
 
             default:
             case State.Fase2:
                 #region Dash
+
                 if (isDashing)
                 {
+                    rb.velocity = new Vector3(rb.velocity.x, 0);
                     Debug.Log("dashing");
                     dashCooldown += Time.deltaTime;
+
                     if (!dashed)
                     {
                         dashed = true;
                         rb.AddForce(Vector2.right * dashForce, ForceMode2D.Impulse);
+                    }
+                    if (dashCooldown < 0.5f)
+                    {
+                        Physics.gravity = Vector3.zero;
+                    }
+                    else if (dashCooldown >= 0.5f && dashCooldown < 2f)
+                    {
+                        Physics.gravity = ProyectGravity;
                     }
                     else if (dashCooldown >= 2f)
                     {
@@ -78,9 +92,7 @@ public class Player : MonoBehaviour
                         dashCooldown = 0;
                     }
                 }
-
                 #endregion
-
 
                 break;
         }
@@ -95,13 +107,18 @@ public class Player : MonoBehaviour
         #endregion
 
         #region FireCall
+
         lastShoot += Time.deltaTime;
+        Debug.Log(lastShoot);
         if (Input.GetKeyDown(KeyCode.F) && lastShoot >= fireRate)
             Shoot();
         #endregion
 
+        #region DashCall
+
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing)
             isDashing = true;
+        #endregion
     }
 
     void Jump()

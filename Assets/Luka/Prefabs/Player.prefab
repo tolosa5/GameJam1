@@ -178,11 +178,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244eab8b0444d55449731c3985f8ffba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   jumpForce: 26.6581
-  characterVelocity: 0
-  playerFeet: {fileID: 7214706900016195454}
   isGround:
     serializedVersion: 2
     m_Bits: 8
-  bullets: {fileID: 0}
+  playerFeet: {fileID: 7214706900016195454}
+  fireRate: 1
+  bullets: {fileID: 6019763574092349463, guid: dba94cc86657cb342b6b06759c865409, type: 3}
   bulletsSprite: []
+  dashForce: 18
