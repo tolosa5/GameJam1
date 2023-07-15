@@ -12,7 +12,7 @@ public class CameraPlayer : MonoBehaviour
         if (!Player.player.CollisionDetection())
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(playerTransform.position.x 
-                + 4, transform.position.y, transform.position.z), 15 * Time.deltaTime);
+                + 4, transform.position.y, transform.position.z), 30 * Time.deltaTime);
 
         }
     }
