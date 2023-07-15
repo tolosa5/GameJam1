@@ -25,14 +25,12 @@ public class Player : MonoBehaviour
 
     #endregion
 
-
-
     #region Disparos
 
     float lastShoot;
     [SerializeField] float fireRate;
 
-    [SerializeField] GameObject bullets;
+    [SerializeField] GameObject bulletsR, bulletsL;
     [SerializeField] Sprite[] bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
 
     #endregion
@@ -153,7 +151,7 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullets, transform.position + Vector3.right * 1.5f, Quaternion.identity);
+        Instantiate(bulletsR, transform.position + Vector3.right * 1.5f, Quaternion.identity);
         lastShoot = 0;
     }
 
@@ -162,7 +160,7 @@ public class Player : MonoBehaviour
         Debug.Log("disparopatra");
         sR.flipX = true;
         yield return new WaitForSeconds(.2f);
-        Instantiate(bullets, transform.position + Vector3.left * 1.5f, Quaternion.identity);
+        Instantiate(bulletsL, transform.position + Vector3.left * 1.5f, Quaternion.identity);
         lastShoot = 0;
         yield return new WaitForSeconds(.2f);
         sR.flipX = false;
@@ -190,6 +188,11 @@ public class Player : MonoBehaviour
     {
         bool activado = Physics2D.OverlapCircle(checker.position, checkerSize, isGround);
         return activado;
+    }
+
+    public void DoubleJump()
+    {
+
     }
 
     public void Death()
