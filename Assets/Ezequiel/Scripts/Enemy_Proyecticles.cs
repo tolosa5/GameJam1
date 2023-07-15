@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Enemy_Proyecticles : MonoBehaviour
 {
-    private float _speed = 5f;
-    private Manager _manager;
-
+    
     private bool _isAttacking = false;
 
     #region Disparos
@@ -24,7 +22,7 @@ public class Enemy_Proyecticles : MonoBehaviour
     void Update()
     {
         Vector2 newWay = new Vector2(transform.position.x - 1, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, newWay, _speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, newWay, Manager.manager.worldSpeed * Time.deltaTime);
         
         if (_isAttacking == false)
         {
