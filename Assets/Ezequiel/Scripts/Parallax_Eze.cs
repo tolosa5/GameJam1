@@ -1,44 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.UIElements;
 
 public class Parallax_Eze : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField] bool scrollLeft;
 
-    float singleTextureWidth;
+    private Manager _manager;
+    public float speed = 5f;
+    private float lenght, startpos;
 
-private void Start ()
-{
-    SetupTexture();
-    if(scrollLeft) moveSpeed = -moveSpeed;
-}
-
-void SetupTexture()
-{
-    Sprite sprite = GetComponent<SpriteRenderer>().sprite;
-    singleTextureWidth = sprite.texture.width / sprite.pixelsPerUnit;
-}
-
-private void Scroll()
-{ 
-float delta = moveSpeed * Time.deltaTime;
-    transform.position += new Vector3(delta, 0f, 0f);
-}
-
-void CheckReset()
+    private void Start()
     {
-        if ((Mathf.Abs(transform.position.x) - singleTextureWidth) > 0)
-        {
-            transform.position = new Vector3(0.0f, transform.position.y, transform.position.z);
-        }
+        startpos = transform.position.x;
+        lenght = GetComponent<SpriteRenderer>().bounds.size.x;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        Scroll();
-        CheckReset();
+        Vector2 newWay = new Vector2(transform.position.x - 1, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, newWay, speed * Time.deltaTime);
+
+        if (transform.position.x <= -36.5f)
+        {
+            transform.position = new Vector3(173 + lenght, transform.position.y, transform.position.z);
+
+        }
     }
 }
