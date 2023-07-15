@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy_Proyecticles : MonoBehaviour
 {
     private float _speed = 5f;
+    private Manager _manager;
+
     private bool _isAttacking = false;
 
     #region Disparos
