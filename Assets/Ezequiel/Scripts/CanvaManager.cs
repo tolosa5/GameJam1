@@ -21,7 +21,12 @@ public class CanvaManager : MonoBehaviour
 
     public void MenuReturn()
     {
-        SceneManager.LoadScene(selecScena[1]);
+        SceneManager.LoadScene("MenuReturn");
+    }
+
+    public void RetryLevel()
+    {
+        SceneManager.LoadScene("Nivel1");
     }
 
     public void Pause()
