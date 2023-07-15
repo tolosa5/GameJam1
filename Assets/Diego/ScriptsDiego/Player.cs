@@ -16,9 +16,12 @@ public class Player : MonoBehaviour
 
     Queue<KeyCode> inputBuffer;
 
+    [SerializeField] float deadHeight;
+
     #region Jump
 
     [SerializeField] float jumpForce;
+    float coyoteTime;
     
     bool isJumping;
     bool isGrounded;
@@ -93,6 +96,7 @@ public class Player : MonoBehaviour
 
         CollisionDetection();
         Jump();
+        CoyoteCheck();
 
         #region JumpCall
 
@@ -100,7 +104,10 @@ public class Player : MonoBehaviour
         {
             inputBuffer.Enqueue(KeyCode.Space);
 
-            Invoke("EraseAction", 0.5f);
+            if (inputBuffer.Count > 0)
+            {
+                Invoke("EraseAction", 0.5f);
+            }
             //isJumping = true;
         }
         #endregion
@@ -140,19 +147,40 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.1f, isGround);
+        isGrounded = Physics2D.OverlapCircle(playerFeet.position, 0.2f, isGround);
 
-        if (isGrounded)
+        if (inputBuffer.Count > 0)
         {
-            if (inputBuffer.Count > 0)
+            if (inputBuffer.Peek() == KeyCode.Space)
             {
-                if (inputBuffer.Peek() == KeyCode.Space)
+                if (isGrounded)
                 {
                     rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
 
                     inputBuffer.Dequeue();
                 }
+                else 
+                {
+                    if ((coyoteTime <= 0.25f))
+                    {
+                        rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                    }
+                }
             }
+        }
+    }
+
+    void CoyoteCheck()
+    {
+        if (isGrounded)
+        {
+            coyoteTime = 0;
+        }
+        else
+        {
+            coyoteTime += Time.deltaTime;
+            Debug.Log("falling");
+            DeadFall();
         }
     }
 
@@ -208,8 +236,18 @@ public class Player : MonoBehaviour
 
     }
 
+    void DeadFall()
+    {
+        if (transform.position.y <= -deadHeight)
+        {
+            Death();
+        }
+    }
+
     public void Death()
     {
+        //canvas de la muerte
+
         //si se mueve 11 bloques a la izquierda se ha muerto
     }
 }
