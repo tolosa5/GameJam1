@@ -2849,7 +2849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8183284897915040534
 Transform:
   m_ObjectHideFlags: 0
@@ -8979,7 +8979,7 @@ PrefabInstance:
     - target: {fileID: 2551759486798844213, guid: 30128c0ce386447cba1306ee169c59ff, type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 7906296282769695985, guid: b6513d7b72e994124b0065e7067ff640, type: 3}
+      objectReference: {fileID: 5257127743101628912, guid: 93138bec62ef545fa80779a60d917721, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30128c0ce386447cba1306ee169c59ff, type: 3}
 --- !u!4 &5270293432499068775 stripped
