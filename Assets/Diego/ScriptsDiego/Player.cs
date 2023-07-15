@@ -121,7 +121,6 @@ public class Player : MonoBehaviour
                     */
                     #endregion
                     
-                    
                 }
                 #endregion
 
@@ -170,8 +169,8 @@ public class Player : MonoBehaviour
     {
         if (h != 0 && ableToDash)
         {
-            isDashing = true;
             ableToDash = false;
+            isDashing = true;
             dashDir = new Vector3(h, 0);
 
             if (dashDir == Vector3.zero)
@@ -197,7 +196,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(dashCooldown);
         isDashing = false;
-        yield return new WaitForSeconds(dashCooldown * 4);
-        ableToDash = true;
+    }
+
+    public void Death()
+    {
+
     }
 }
