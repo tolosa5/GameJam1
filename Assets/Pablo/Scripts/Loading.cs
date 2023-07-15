@@ -7,23 +7,19 @@ using UnityEngine.UI;
 public class Loading : MonoBehaviour
 {
 
-    //[SerializeField] private Slider sliderLoading;
-    
+   // [SerializeField] private Slider sliderLoading;
     public Button btnReadyToPlay;
-    private AsyncOperation operation;
-    private bool loaded = false;
+    AsyncOperation operation;
 
+    private bool loaded = false;
+   
     private void Start()
     {
         string LoadLvL = SceneLoad.nextLVL;
         StartCoroutine(StartLoad(LoadLvL));
         btnReadyToPlay.onClick.AddListener(delegate
         {
-            if(loaded)
-            {
-                operation.allowSceneActivation = true;
-            }
-
+            operation.allowSceneActivation = true;
         });
     }
 
@@ -40,14 +36,10 @@ public class Loading : MonoBehaviour
 
             if (operation.progress >= 0.9f)
             {
-                btnReadyToPlay.gameObject.SetActive(true);
                 loaded = true;
+                btnReadyToPlay.gameObject.SetActive(true);
             }
-
             yield return null;
         }
     }
-
-
-
 }
