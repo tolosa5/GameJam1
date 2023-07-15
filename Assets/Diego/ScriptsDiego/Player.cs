@@ -8,6 +8,12 @@ public class Player : MonoBehaviour
     public State currentState;
     public static Player player;
 
+    float h; //Inputs
+
+    Rigidbody2D rb;
+    Sprite playerSprite;
+    SpriteRenderer sR;
+
     #region Jump
 
     [SerializeField] float jumpForce;
@@ -19,13 +25,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    float h; //Inputs
 
-    Rigidbody2D rb;
-    Sprite playerSprite;
-    SpriteRenderer sR;
-
-    Vector3 ProyectGravity;
 
     #region Disparos
 
@@ -39,7 +39,12 @@ public class Player : MonoBehaviour
 
     #region Dash
 
-    float dashCooldown = 0.5f;
+    float Gravity;
+
+    TrailRenderer tr;
+
+    [SerializeField] float dashCooldown = 2f;
+    [SerializeField] float dashTime = 0.2f;
     [SerializeField] float dashForce;
 
     bool ableToDash = true;
@@ -74,8 +79,9 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sR = GetComponent<SpriteRenderer>();
+        tr = GetComponent<TrailRenderer>();
 
-        ProyectGravity = Physics.gravity;
+        Gravity = rb.gravityScale;
     }
 
     private void Update()
@@ -90,37 +96,9 @@ public class Player : MonoBehaviour
             default:
             case State.Fase2:
                 #region Dash
-                Dash();
-                if (isDashing)
+                if (ableToDash && h != 0)
                 {
-                    #region Dash1
-                    /*
-                    rb.velocity = new Vector3(rb.velocity.x, 0);
-                    Debug.Log("dashing");
-                    dashCooldown += Time.deltaTime;
-
-                    if (!dashed)
-                    {
-                        dashed = true;
-                        rb.AddForce(Vector2.right * dashForce, ForceMode2D.Impulse);
-                    }
-                    if (dashCooldown < 0.5f)
-                    {
-                        Physics.gravity = Vector3.zero;
-                    }
-                    else if (dashCooldown >= 0.5f && dashCooldown < 2f)
-                    {
-                        Physics.gravity = ProyectGravity;
-                    }
-                    else if (dashCooldown >= 2f)
-                    {
-                        isDashing = false;
-                        dashed = false;
-                        dashCooldown = 0;
-                    }
-                    */
-                    #endregion
-                    
+                    StartCoroutine(Dash());
                 }
                 #endregion
 
@@ -138,9 +116,12 @@ public class Player : MonoBehaviour
         #region FireCall
 
         lastShoot += Time.deltaTime;
-        //Debug.Log(lastShoot);
+        
         if (Input.GetKeyDown(KeyCode.F) && lastShoot >= fireRate)
             Shoot();
+
+        if (Input.GetKeyDown(KeyCode.Q) && lastShoot >= fireRate)
+            BackShoot();
         #endregion
 
         #region DashCall
@@ -161,41 +142,40 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullets, transform.position + Vector3.right * 1f, Quaternion.identity);
+        Instantiate(bullets, transform.position + Vector3.right * 1.5f, Quaternion.identity);
         lastShoot = 0;
     }
 
-    void Dash()
+    IEnumerator BackShoot()
     {
-        if (h != 0 && ableToDash)
-        {
-            ableToDash = false;
-            isDashing = true;
-            dashDir = new Vector3(h, 0);
+        sR.flipX = true;
+        yield return new WaitForSeconds(.2f);
+        Instantiate(bullets, transform.position + Vector3.left * 1.5f, Quaternion.identity);
+        lastShoot = 0;
+    }
 
-            if (dashDir == Vector3.zero)
-            {
-                dashDir = new Vector3(transform.localScale.x, 0);
-            }
-        }
+    IEnumerator Dash()
+    {
+        ableToDash = false;
+        isDashing = true;
+        rb.gravityScale = 0f;
+        tr.emitting = true;
 
-        StartCoroutine(StopDash());
-        if (isDashing)
-        {
-            rb.velocity = dashDir.normalized * dashForce;
-        }
+        rb.velocity = new Vector3(h * dashForce, 0f);
+
+        yield return new WaitForSeconds(dashTime);
+        tr.emitting = false;
+        rb.gravityScale = Gravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        ableToDash = true;
     }
 
     public bool CollisionDetection()
     {
         bool activado = Physics2D.OverlapCircle(checker.position, checkerSize, isGround);
         return activado;
-    }
-
-    IEnumerator StopDash()
-    {
-        yield return new WaitForSeconds(dashCooldown);
-        isDashing = false;
     }
 
     public void Death()
