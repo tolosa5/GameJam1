@@ -212,15 +212,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  playerSprites: []
   jumpForce: 26.6581
   isGround:
     serializedVersion: 2
     m_Bits: 8
   playerFeet: {fileID: 7329533441374871501}
   fireRate: 1
-  bullets: {fileID: 6019763574092349463, guid: dba94cc86657cb342b6b06759c865409, type: 3}
+  bulletsR: {fileID: 6019763574092349463, guid: dba94cc86657cb342b6b06759c865409, type: 3}
+  bulletsL: {fileID: 6019763574092349463, guid: 2e6ec7992cf7949ac872d5b9284d5c94, type: 3}
   bulletsSprite: []
-  dashCooldown: 2
+  dashCooldown: 2.5
   dashTime: 0.2
   dashForce: 12
   checker: {fileID: 1753831853}
