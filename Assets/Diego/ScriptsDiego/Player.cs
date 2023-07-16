@@ -6,15 +6,18 @@ public class Player : MonoBehaviour
 {
     public enum State {Fase1, Fase2}
     public State currentState;
+
     public static Player player;
+
 
     Vector3 myPosition;
 
     float h; //Inputs
 
+    Animator anim;
     Rigidbody2D rb;
     SpriteRenderer sR;
-    [SerializeField] Sprite[] playerSprites;
+    [SerializeField] Sprite gameboySprite;
 
     Queue<KeyCode> inputBuffer;
 
@@ -40,7 +43,7 @@ public class Player : MonoBehaviour
     [SerializeField] float fireRate;
 
     [SerializeField] GameObject bulletsR, bulletsL;
-    [SerializeField] Sprite[] bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
+    [SerializeField] Sprite bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
 
     #endregion
 
@@ -93,6 +96,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sR = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
+        anim = GetComponent<Animator>();
 
         inputBuffer = new Queue<KeyCode>();
 
@@ -102,6 +106,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         h = Input.GetAxisRaw("Horizontal");
+
+        anim.SetBool("Walking", isJumping || isDashing);
 
         CollisionDetection();
         Jump();
@@ -189,8 +195,9 @@ public class Player : MonoBehaviour
             {
                 if (isGrounded)
                 {
-                    //isJumping = true;
+                    isJumping = true;
                     rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                    anim.SetTrigger("Jump");
 
                     inputBuffer.Dequeue();
                 }
@@ -198,8 +205,10 @@ public class Player : MonoBehaviour
                 {
                     if ((coyoteTime <= 0.12f) && !coyoteActivated)
                     {
+                        isJumping = true;
                         coyoteActivated = true;
                         rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                        anim.SetTrigger("Jump");
                     }
                 }
             }
@@ -212,7 +221,7 @@ public class Player : MonoBehaviour
         {
             coyoteTime = 0;
             coyoteActivated = false;
-            //isJumping = false;
+            isJumping = false;
         }
         else
         {
@@ -267,6 +276,24 @@ public class Player : MonoBehaviour
         bool activado = Physics2D.OverlapCircle(checker.position, checkerSize, isGround);
         return activado;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("BulletEnemy"))
+        {
+            Death();
+        }
+
+        if (collision.gameObject.CompareTag("TP"))
+        {
+            SpriteChange();
+            currentState = State.Fase2;
+        }
+    }
+
+    void SpriteChange()
+    {
+        sR.sprite = gameboySprite;
+    }
 
     public void DoubleJumpActivator()
     {
@@ -282,10 +309,9 @@ public class Player : MonoBehaviour
         }
     }
 
+
     public void Death()
     {
         Manager.manager.EndGame();
-
-        //si se mueve 11 bloques a la izquierda se ha muerto
     }
 }

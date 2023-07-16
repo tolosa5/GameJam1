@@ -8,6 +8,9 @@ TagManager:
   - Portal
   - Bullet
   - Coin
+  - Enemy
+  - BulletEnemy
+  - Shield
   layers:
   - Default
   - TransparentFX
