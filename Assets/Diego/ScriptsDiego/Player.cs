@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     [SerializeField] float fireRate;
 
     [SerializeField] GameObject bulletsR, bulletsL;
-    [SerializeField] Sprite bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
+    [SerializeField] Sprite bulletsSprite, bulletsPong; //cambiar el sprite de las balas segun el nivel en el que se esta
 
     #endregion
 
@@ -177,6 +177,7 @@ public class Player : MonoBehaviour
         {
             default:
             case State.Fase1:
+
                 
             break;
             case State.Fase2:
@@ -322,7 +323,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Portal"))
         {
-            SpriteChange();
+            //SpriteChange();
             currentState = State.Fase2;
         }
     }
@@ -347,8 +348,18 @@ public class Player : MonoBehaviour
         cubo.SetActive(false);
         gbBoy.GetComponent<SpriteRenderer>().enabled = true;
 
-        bulletsL.GetComponent<SpriteRenderer>().sprite = bulletsSprite;
-        bulletsR.GetComponent<SpriteRenderer>().sprite = bulletsSprite;
+        if (currentState == State.Fase2)
+        {
+            bulletsL.GetComponent<SpriteRenderer>().sprite = bulletsSprite;
+            bulletsR.GetComponent<SpriteRenderer>().sprite = bulletsSprite;
+
+        }
+        else
+        {
+            bulletsL.GetComponent<SpriteRenderer>().sprite = bulletsPong;
+            bulletsR.GetComponent<SpriteRenderer>().sprite = bulletsPong;
+        }
+
     }
 
     void Fall()

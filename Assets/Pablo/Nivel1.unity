@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 977207259}
   m_Layer: 0
   m_Name: AudioFondo
-  m_TagString: Untagged
+  m_TagString: AudioFondo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c9ac9bd6cd5ce4795f697fea7f0291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioFondo: {fileID: 977207259}
   lvlOne:
   - {fileID: 2535270816231728823, guid: 7b9e5fd83b931eb4a8dd5dbf6a3834f3, type: 3}
   - {fileID: 2535270816231728823, guid: aa26fbab602754f4d987edb310cfe29f, type: 3}

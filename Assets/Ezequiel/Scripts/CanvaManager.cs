@@ -19,11 +19,11 @@ public class CanvaManager : MonoBehaviour
         {
             default:
             case 1:
-                SceneLoad.LoadScene("Nivel1");    
+                SceneLoad.LoadScene("Nivel1");  
                 break;
 
             case 2:
-                SceneLoad.LoadScene("Nivel2");
+                SceneLoad.LoadScene("Nivel2");  
                 break;
         }
     }
