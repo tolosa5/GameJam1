@@ -23,6 +23,9 @@ public class CameraPlayer : MonoBehaviour
     private void Update()
     {
         //para que cuando se choque con pared que se lo lleve, la camara le deje
+
+        // CHOQUE PARED Estancar
+
         if (!Player.player.CollisionDetection())
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(playerTransform.position.x 

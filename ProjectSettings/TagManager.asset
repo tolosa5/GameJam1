@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - BulletEnemy
   - Shield
+  - Score
   layers:
   - Default
   - TransparentFX

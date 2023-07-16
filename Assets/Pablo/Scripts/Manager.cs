@@ -22,7 +22,7 @@ public class Manager : MonoBehaviour
     public bool worldGenerated = false;
     public Transform posStartGeneration;
     public GameObject goPause;
-    public GameObject goGameOver;
+    public GameObject[] goGameOver;
     public GameObject goNivel1HUD;
     public GameObject goNivel2HUD;
     private bool pauseActive = false;
@@ -31,6 +31,7 @@ public class Manager : MonoBehaviour
 
     public float scorePoints;
     public Text[] textScore;
+    public Text textTotalScore;
     private int actualText = 0;
 
 
@@ -78,9 +79,11 @@ public class Manager : MonoBehaviour
             Debug.Log("Hola");
             break;
             case "Menu":
+                Time.timeScale = 1f;
                 actualText = 0;
                 Destroy(Player.player.gameObject);
                 Destroy(this.gameObject);
+                Destroy(CameraPlayer.camPlayer.gameObject);
                 break;
             case "Nivel1":
                 goNivel1HUD.SetActive(true);
@@ -89,6 +92,9 @@ public class Manager : MonoBehaviour
                 break;
             
             case "Nivel2":
+                Player.player.gameObject.SetActive(true);
+                this.gameObject.SetActive(true);
+                CameraPlayer.camPlayer.gameObject.SetActive(true);
                 actualText++;
                 Player.player.transform.position = new Vector3(-110f,0,0);
                 Manager.manager.limiteRooms++;
@@ -102,7 +108,14 @@ public class Manager : MonoBehaviour
 
                 OnStartLevel();
                 break;
+            case "Victory":
 
+                Destroy(Player.player.gameObject);
+
+                textTotalScore = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+                textTotalScore.text = "Total Score: " + (int)scorePoints;
+
+                break;
         }
 
     }
@@ -167,11 +180,25 @@ public class Manager : MonoBehaviour
 
     public void OnEndLevel()
     {
+
         Debug.Log("Cambio Escena");
         GeneratedRooms.Clear();
-        SceneManager.LoadScene("Nivel2");
-        
 
+        switch(actualLevel)
+        {
+            case 1:
+
+                break;
+
+            case 2:
+                SceneManager.LoadScene("Nivel2");
+                break;
+            case 3:
+                SceneManager.LoadScene("Victory");
+                break;
+
+        }
+        
     }
 
 
@@ -186,8 +213,17 @@ public class Manager : MonoBehaviour
 
     public void EndGame()
     {
-
-        goGameOver.SetActive(true);
+        if(actualText == 0)
+        {
+            goGameOver[actualText].SetActive(true);
+            Time.timeScale = 0; 
+        }
+        else
+        {
+            goGameOver[actualText].SetActive(true);
+            Time.timeScale = 0; 
+        }
+        
 
         
     }
@@ -196,6 +232,7 @@ public class Manager : MonoBehaviour
     {
         
         scorePoints += Time.deltaTime * 10;
+
         if(actualText==0)
         {
             textScore[actualText].text =  "Score: " + (int)scorePoints;
@@ -204,7 +241,9 @@ public class Manager : MonoBehaviour
         {
             textScore[actualText].text = "" + (int)scorePoints;
         }
- 
+
+
+  
 
     }
 

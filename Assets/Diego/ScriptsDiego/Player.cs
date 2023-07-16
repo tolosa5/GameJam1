@@ -175,10 +175,10 @@ public class Player : MonoBehaviour
         Debug.Log(dashCooldown);
         switch(currentState)
         {
+            default:
             case State.Fase1:
                 
-
-            default:
+            break;
             case State.Fase2:
 
                 #region Dash
@@ -311,18 +311,28 @@ public class Player : MonoBehaviour
         bool activado = Physics2D.OverlapCircle(checker.position, checkerSize, isGround);
         return activado;
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Portal"))
+        {
+            SpriteChange();
+            currentState = State.Fase2;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("BulletEnemy"))
         {
             Death();
         }
-
-        if (collision.gameObject.CompareTag("TP"))
+/*
+        if (collision.gameObject.CompareTag("Portal"))
         {
             SpriteChange();
             currentState = State.Fase2;
         }
+        */
     }
 
     void SpriteChange()
