@@ -6,7 +6,7 @@ using UnityEngine.U2D.IK;
 public class Parallax_Eze : MonoBehaviour
 {
 
-    public float speed = 5f;
+    //public float speed = 5f;
     //private float lenght;
     //private Vector2 startpos;
     //public GameObject cam;
@@ -15,7 +15,7 @@ public class Parallax_Eze : MonoBehaviour
     {
 
         Vector2 newWay = new Vector2(transform.position.x - 1, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, newWay, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, newWay, (Manager.manager.worldSpeed - 2f) * Time.deltaTime);
     }
         //    //if (transform.position.x <= -120.5f)
         //    //{

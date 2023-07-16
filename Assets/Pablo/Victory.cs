@@ -10,7 +10,7 @@ public class Victory : MonoBehaviour
 
     void Start()
     {
-        goToMenu.onClick.AddListener(delegate{SceneManager.LoadScene("Menu");});
+        goToMenu.onClick.AddListener(delegate{SceneManager.LoadScene("Menu"); Destroy(Manager.manager.gameObject); Destroy(CameraPlayer.camPlayer.gameObject);});
     }
 
 

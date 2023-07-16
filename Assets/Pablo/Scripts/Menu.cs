@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
     public Button btnPlay;
     public Button btnExit;
 
-
+ 
     private void Start()
     {
         InitializeVariables();

@@ -8,6 +8,7 @@ public class Manager : MonoBehaviour
 {
     public static Manager manager;
 
+    [HideInInspector] public AudioSource audioFondo;
 
     public List<GameObject> lvlOne = new List<GameObject>();
     public List<GameObject> lvlTwo = new List<GameObject>();
@@ -51,7 +52,7 @@ public class Manager : MonoBehaviour
 
         OnStartLevel();
 
-
+        audioFondo = GameObject.FindGameObjectWithTag("AudioFondo").GetComponent<AudioSource>();
         
     }
 
@@ -76,8 +77,6 @@ public class Manager : MonoBehaviour
         switch(sceneLoad.name)
         {
             default:
-            Debug.Log("Hola");
-            break;
             case "Menu":
                 Time.timeScale = 1f;
                 actualText = 0;
@@ -85,9 +84,13 @@ public class Manager : MonoBehaviour
                 Destroy(this.gameObject);
                 Destroy(CameraPlayer.camPlayer.gameObject);
                 break;
+
             case "Nivel1":
+                Time.timeScale = 1f;
+                Player.player.currentState = Player.State.Fase1;
                 goNivel1HUD.SetActive(true);
                 goNivel2HUD.SetActive(false);
+                audioFondo = GameObject.FindGameObjectWithTag("AudioFondo").GetComponent<AudioSource>();
 
                 break;
             
@@ -99,6 +102,8 @@ public class Manager : MonoBehaviour
                 Player.player.SpriteChange();
                 Player.player.transform.position = new Vector3(-110f,0,0);
                 Time.timeScale = 1f;
+
+                audioFondo = GameObject.FindGameObjectWithTag("AudioFondo").GetComponent<AudioSource>();
                 Manager.manager.limiteRooms++;
                 goNivel1HUD.SetActive(false);
                 goNivel2HUD.SetActive(true);
@@ -117,7 +122,6 @@ public class Manager : MonoBehaviour
             break;
 
             case "Victory":
-
                 Destroy(Player.player.gameObject);
 
                 textTotalScore = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
@@ -195,14 +199,15 @@ public class Manager : MonoBehaviour
         switch(actualLevel)
         {
             case 1:
-
+                Debug.Log("Hola");
                 break;
 
             case 2:
                 SceneLoad.LoadScene("Nivel2");
                 break;
             case 3:
-                SceneLoad.LoadScene("Victory");
+                Debug.Log("Victoria");
+                SceneManager.LoadScene("Victory");
                 break;
 
         }
@@ -224,11 +229,13 @@ public class Manager : MonoBehaviour
         if(actualText == 0)
         {
             goGameOver[actualText].SetActive(true);
+            audioFondo.Stop();
             Time.timeScale = 0; 
         }
         else
         {
             goGameOver[actualText].SetActive(true);
+            audioFondo.Stop();
             Time.timeScale = 0; 
         }
         
