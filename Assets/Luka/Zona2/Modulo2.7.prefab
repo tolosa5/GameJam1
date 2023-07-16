@@ -9110,6 +9110,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2551759486798844213, guid: 30128c0ce386447cba1306ee169c59ff, type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 5257127743101628912, guid: 93138bec62ef545fa80779a60d917721, type: 3}
+    - target: {fileID: 2551759486798844213, guid: 30128c0ce386447cba1306ee169c59ff, type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 7906296282769695985, guid: 91edade31b28040c1840d1e8fd897ccc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30128c0ce386447cba1306ee169c59ff, type: 3}
 --- !u!4 &7413892825641951489 stripped
