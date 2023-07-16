@@ -181,6 +181,8 @@ public class Player : MonoBehaviour
             break;
             case State.Fase2:
 
+                fireRate = .5f;
+
                 #region Dash
                 if (ableToDash && h != 0)
                 {
@@ -316,7 +318,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Portal"))
         {
-            SpriteChange();
+            StartCoroutine(SpriteChange());
             currentState = State.Fase2;
         }
     }
@@ -326,17 +328,19 @@ public class Player : MonoBehaviour
         {
             Death();
         }
-/*
-        if (collision.gameObject.CompareTag("Portal"))
-        {
-            SpriteChange();
-            currentState = State.Fase2;
-        }
-        */
     }
 
-    void SpriteChange()
+    private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("CameraKill"))
+        {
+            Death();
+        }
+    }
+
+    IEnumerator SpriteChange()
+    {
+        yield return new WaitForSeconds(0.5f);
         cubo.SetActive(false);
         gbBoy.GetComponent<SpriteRenderer>().enabled = true;
     }

@@ -12,6 +12,7 @@ TagManager:
   - BulletEnemy
   - Shield
   - Score
+  - CameraKill
   layers:
   - Default
   - TransparentFX

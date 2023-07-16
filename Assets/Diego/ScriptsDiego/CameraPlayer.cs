@@ -31,5 +31,9 @@ public class CameraPlayer : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, new Vector3(playerTransform.position.x 
                 + 4, transform.position.y, transform.position.z), 30 * Time.deltaTime);
         }
+        else
+        {
+            transform.position = transform.position;
+        }
     }
 }
