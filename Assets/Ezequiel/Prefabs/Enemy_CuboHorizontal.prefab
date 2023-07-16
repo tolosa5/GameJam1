@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7906296282769695991}
   - component: {fileID: 7906296282769695994}
   - component: {fileID: 7906296282769695992}
-  - component: {fileID: 7906296282769695995}
   - component: {fileID: 7910022810082867982}
+  - component: {fileID: 3803474325276217821}
   m_Layer: 0
   m_Name: Enemy_CuboHorizontal
   m_TagString: Enemy
@@ -135,20 +135,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7906296282769695995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7906296282769695985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ffe22c5ed364643a2a6b509a448435, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAudio: {fileID: 7910022810082867982}
-  deadAudio: {fileID: 8300000, guid: 77e5584181210454098143db948decfb, type: 3}
 --- !u!82 &7910022810082867982
 AudioSource:
   m_ObjectHideFlags: 0
@@ -245,3 +231,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3803474325276217821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7906296282769695985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0454040aa15004f9abeb5291b778fe53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAudio: {fileID: 7910022810082867982}
+  deadAudio: {fileID: 8300000, guid: 77e5584181210454098143db948decfb, type: 3}
