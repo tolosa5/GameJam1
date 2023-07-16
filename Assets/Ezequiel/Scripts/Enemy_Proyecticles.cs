@@ -29,7 +29,6 @@ public class Enemy_Proyecticles : MonoBehaviour
         if (_isAttacking == false)
         {
             StartCoroutine(Shoot());
-            enemyAudio.PlayOneShot(shootAudio, 1.0f); ;
             _isAttacking = true;
         }
 
@@ -39,6 +38,8 @@ public class Enemy_Proyecticles : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         Instantiate(bullets, pointInstance.transform.position + Vector3.right * 1f, Quaternion.identity);
+        enemyAudio.PlayOneShot(shootAudio, 1.0f);
+
         _isAttacking = false;
     }
 

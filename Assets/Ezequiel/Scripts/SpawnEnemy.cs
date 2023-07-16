@@ -10,7 +10,7 @@ public class SpawnEnemy : MonoBehaviour
 
     void Start()
     {
-        _randomizeEnemy = Random.Range(0, 2);
+        _randomizeEnemy = Random.Range(0, enemies.Length);
         Instantiate(enemies[_randomizeEnemy], transform.position, Quaternion.identity);
     }
 }
