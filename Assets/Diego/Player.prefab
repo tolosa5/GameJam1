@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 7329533441776543772}
   - component: {fileID: 7329533441776543774}
   - component: {fileID: 920439475}
+  - component: {fileID: 5622521683854570730}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  playerSprites: []
+  gameboySprite: {fileID: 0}
   deadHeight: -12
   jumpForce: 26.6581
   isGround:
@@ -222,8 +223,8 @@ MonoBehaviour:
   feetRadius: 0.05
   fireRate: 1
   bulletsR: {fileID: 6019763574092349463, guid: dba94cc86657cb342b6b06759c865409, type: 3}
-  bulletsL: {fileID: 6019763574092349463, guid: 2e6ec7992cf7949ac872d5b9284d5c94, type: 3}
-  bulletsSprite: []
+  bulletsL: {fileID: 6019763574092349463, guid: 01dafdaafe6d8a740ae011d10f557008, type: 3}
+  bulletsSprite: {fileID: 0}
   dashCooldown: 2.5
   dashTime: 0.2
   dashForce: 12
@@ -337,3 +338,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.12
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!95 &5622521683854570730
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329533441776543761}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f44444514f0eba45bbf5642c1c07787, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

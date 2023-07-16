@@ -5,6 +5,20 @@ using UnityEngine;
 public class CameraPlayer : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
+    public static CameraPlayer camPlayer;
+
+    private void Awake()
+    {
+        if (camPlayer != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            camPlayer = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Update()
     {
