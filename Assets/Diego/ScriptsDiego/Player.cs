@@ -24,6 +24,10 @@ public class Player : MonoBehaviour
     SpriteRenderer sR;
     [SerializeField] Sprite gameboySprite;
 
+    [SerializeField] AudioClip[] clipsPong;
+    [SerializeField] AudioClip[] clipsGB;
+    [SerializeField] AudioSource aS;
+
     Queue<KeyCode> inputBuffer;
 
     [SerializeField] float deadHeight;
@@ -208,6 +212,16 @@ public class Player : MonoBehaviour
                     rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
                     anim.SetTrigger("Jump");
 
+                    if (cubo.activeSelf)
+                    {
+                        aS.PlayOneShot(clipsPong[1]);
+
+                    }
+                    else
+                    {
+                        aS.PlayOneShot(clipsGB[3]);
+                    }
+
                     inputBuffer.Dequeue();
                 }
                 else 
@@ -249,6 +263,16 @@ public class Player : MonoBehaviour
     {
         Instantiate(bulletsR, transform.position + Vector3.right * 1.5f, Quaternion.identity);
         lastShoot = 0;
+
+        if (cubo.activeSelf)
+        {
+            aS.PlayOneShot(clipsPong[2]);
+
+        }
+        else
+        {
+            aS.PlayOneShot(clipsGB[1]);
+        }
     }
 
     IEnumerator BackShoot()
@@ -270,6 +294,8 @@ public class Player : MonoBehaviour
         tr.emitting = true;
 
         rb.velocity = new Vector3(h * dashForce, 0f);
+        aS.PlayOneShot(clipsPong[0]);
+
 
         yield return new WaitForSeconds(dashTime);
         tr.emitting = false;
@@ -305,11 +331,6 @@ public class Player : MonoBehaviour
         gbBoy.GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    public void DoubleJumpActivator()
-    {
-
-    }
-
     void Fall()
     {
         if (transform.position.y <= deadHeight)
@@ -322,6 +343,16 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        if (cubo.activeSelf)
+        {
+            aS.PlayOneShot(clipsPong[0]);
+
+        }
+        else
+        {
+            aS.PlayOneShot(clipsGB[2]);
+        }
+
         Manager.manager.EndGame();
     }
 }

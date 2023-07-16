@@ -405,6 +405,14 @@ MonoBehaviour:
   currentState: 0
   animOver: {fileID: 22100000, guid: 09e54b8226bf36a4ea60cfacb788e226, type: 2}
   gameboySprite: {fileID: -1194493667, guid: 9b50a15c4728d5d4b92e3153b693ce0a, type: 3}
+  clips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   deadHeight: -12
   jumpForce: 26.6581
   isGround:
