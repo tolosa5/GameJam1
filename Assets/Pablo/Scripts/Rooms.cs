@@ -73,7 +73,7 @@ public class Rooms : MonoBehaviour
 
             if (Manager.manager.GeneratedRooms.Count == Manager.manager.limiteRooms)
             {
-                GameObject goPortal = Instantiate(Manager.manager.goPortal, transform.position + new Vector3(8,-2f,0), Manager.manager.goPortal.transform.rotation);
+                GameObject goPortal = Instantiate(Manager.manager.goPortal, transform.position + new Vector3(110,0,0), Manager.manager.goPortal.transform.rotation);
 
                 goPortal.transform.parent = Manager.manager.GeneratedRooms[Manager.manager.GeneratedRooms.Count - 1].transform;
 

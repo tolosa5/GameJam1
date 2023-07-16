@@ -194,7 +194,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 9.3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f509918afaa94b346a84e2a98ef70229, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   playerSprites: []
-  deadHeight: 0
+  deadHeight: -12
   jumpForce: 26.6581
   isGround:
     serializedVersion: 2
@@ -280,7 +280,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5
+        value: 0.49999672
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -334,6 +334,6 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.12
   m_Autodestruct: 0
   m_Emitting: 0

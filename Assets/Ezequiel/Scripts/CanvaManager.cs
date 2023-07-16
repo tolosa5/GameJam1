@@ -6,42 +6,37 @@ using UnityEngine.UI;
 
 public class CanvaManager : MonoBehaviour
 {
-    //[SerializeField] private Image menuPause;
-    //public int[] selecScena;
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 
     public void MenuReturn()
     {
-        SceneLoad.LoadScene("Menu");
+        SceneManager.LoadScene("Menu");
+        Time.timeScale = 1f;
     }
 
     public void RetryLevel()
     {
-        SceneLoad.LoadScene("Nivel1");
+        switch(Manager.manager.actualLevel)
+        {
+            default:
+            case 1:
+                SceneLoad.LoadScene("Nivel1");    
+                break;
+
+            case 2:
+                SceneLoad.LoadScene("Nivel2");
+                break;
+        }
     }
 
     public void Pause()
     {
-        Debug.Log("Pause");
         Time.timeScale = 0;
-        //gameObject.SetActive(true);
+
 
     }
 
     public void Continue()
     {
-        //gameObject.SetActive(false);
-        Debug.Log("Resume");
         Time.timeScale = 1;
-
     }
 }
