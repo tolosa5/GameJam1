@@ -96,7 +96,9 @@ public class Manager : MonoBehaviour
                 this.gameObject.SetActive(true);
                 CameraPlayer.camPlayer.gameObject.SetActive(true);
                 actualText++;
+                Player.player.SpriteChange();
                 Player.player.transform.position = new Vector3(-110f,0,0);
+                Time.timeScale = 1f;
                 Manager.manager.limiteRooms++;
                 goNivel1HUD.SetActive(false);
                 goNivel2HUD.SetActive(true);
@@ -108,6 +110,12 @@ public class Manager : MonoBehaviour
 
                 OnStartLevel();
                 break;
+
+            case "Loading":
+                Player.player.gameObject.SetActive(false);
+                CameraPlayer.camPlayer.gameObject.SetActive(false);
+            break;
+
             case "Victory":
 
                 Destroy(Player.player.gameObject);
@@ -191,10 +199,10 @@ public class Manager : MonoBehaviour
                 break;
 
             case 2:
-                SceneManager.LoadScene("Nivel2");
+                SceneLoad.LoadScene("Nivel2");
                 break;
             case 3:
-                SceneManager.LoadScene("Victory");
+                SceneLoad.LoadScene("Victory");
                 break;
 
         }
