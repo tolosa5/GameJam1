@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        aS.PlayOneShot(clipsGB[3]);
+                        aS.PlayOneShot(clipsGB[1]);
                     }
 
                     inputBuffer.Dequeue();
@@ -273,7 +273,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            aS.PlayOneShot(clipsGB[1]);
+            aS.PlayOneShot(clipsGB[2]);
         }
     }
 
@@ -282,7 +282,11 @@ public class Player : MonoBehaviour
         Debug.Log("disparopatra");
         sR.flipX = true;
         yield return new WaitForSeconds(.2f);
+
         Instantiate(bulletsL, transform.position + Vector3.left * 1.5f, Quaternion.identity);
+
+        aS.PlayOneShot(clipsGB[2]);
+
         lastShoot = 0;
         yield return new WaitForSeconds(.2f);
         sR.flipX = false;
@@ -296,7 +300,7 @@ public class Player : MonoBehaviour
         tr.emitting = true;
 
         rb.velocity = new Vector3(h * dashForce, 0f);
-        aS.PlayOneShot(clipsPong[0]);
+        aS.PlayOneShot(clipsGB[3]);
 
 
         yield return new WaitForSeconds(dashTime);
@@ -318,7 +322,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Portal"))
         {
-            StartCoroutine(SpriteChange());
+            SpriteChange();
             currentState = State.Fase2;
         }
     }
@@ -338,11 +342,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator SpriteChange()
+    public void SpriteChange()
     {
-        yield return new WaitForSeconds(0.5f);
         cubo.SetActive(false);
         gbBoy.GetComponent<SpriteRenderer>().enabled = true;
+
+        bulletsL.GetComponent<SpriteRenderer>().sprite = bulletsSprite;
+        bulletsR.GetComponent<SpriteRenderer>().sprite = bulletsSprite;
     }
 
     void Fall()
@@ -364,7 +370,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            aS.PlayOneShot(clipsGB[2]);
+            aS.PlayOneShot(clipsGB[0]);
         }
 
         Manager.manager.EndGame();
