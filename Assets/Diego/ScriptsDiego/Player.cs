@@ -14,7 +14,12 @@ public class Player : MonoBehaviour
 
     float h; //Inputs
 
+    #region Animaciones
+
     Animator anim;
+    [SerializeField] AnimatorOverrideController animOver;
+    #endregion
+
     Rigidbody2D rb;
     SpriteRenderer sR;
     [SerializeField] Sprite gameboySprite;
@@ -77,6 +82,8 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    [SerializeField] GameObject cubo;
+    [SerializeField] GameObject gbBoy;
 
     private void Awake()
     {
@@ -89,6 +96,7 @@ public class Player : MonoBehaviour
             player = this;
         }
         DontDestroyOnLoad(gameObject);
+        
     }
 
     private void Start()
@@ -96,7 +104,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sR = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
-        anim = GetComponent<Animator>();
+        anim = gbBoy.GetComponent<Animator>();
 
         inputBuffer = new Queue<KeyCode>();
 
@@ -164,6 +172,7 @@ public class Player : MonoBehaviour
         switch(currentState)
         {
             case State.Fase1:
+                
 
             default:
             case State.Fase2:
@@ -292,7 +301,8 @@ public class Player : MonoBehaviour
 
     void SpriteChange()
     {
-        sR.sprite = gameboySprite;
+        cubo.SetActive(false);
+        gbBoy.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public void DoubleJumpActivator()
