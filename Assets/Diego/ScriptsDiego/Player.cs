@@ -106,6 +106,9 @@ public class Player : MonoBehaviour
         CollisionDetection();
         Jump();
         CoyoteCheck();
+
+        #region CameraKill
+
         if (CollisionDetection())
         {
             if (!collisionActivated)
@@ -113,16 +116,21 @@ public class Player : MonoBehaviour
                 collisionActivated = true;
                 myPosition = transform.position;
             }
+
             if (Vector3.Distance(myPosition, transform.position) >= 12)
             {
                 Death();
             }
             else
             {
-                //myPosition = Vector3.zero;
                 collisionActivated = false;
             }
         }
+        else
+        {
+            myPosition = Vector3.zero;
+        }
+        #endregion
 
         #region JumpCall
 
@@ -132,9 +140,8 @@ public class Player : MonoBehaviour
 
             if (inputBuffer.Count > 0)
             {
-                Invoke("EraseAction", 0.5f);
+                Invoke("EraseAction", 0.1f);
             }
-
         }
         #endregion
 
@@ -171,6 +178,7 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
     void Jump()
     {
         isGrounded = Physics2D.OverlapCircle(playerFeet.position, feetRadius, isGround);
@@ -181,13 +189,14 @@ public class Player : MonoBehaviour
             {
                 if (isGrounded)
                 {
+                    //isJumping = true;
                     rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
 
                     inputBuffer.Dequeue();
                 }
                 else 
                 {
-                    if ((coyoteTime <= 0.25f) && !coyoteActivated)
+                    if ((coyoteTime <= 0.12f) && !coyoteActivated)
                     {
                         coyoteActivated = true;
                         rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
@@ -203,12 +212,13 @@ public class Player : MonoBehaviour
         {
             coyoteTime = 0;
             coyoteActivated = false;
+            //isJumping = false;
         }
         else
         {
             coyoteTime += Time.deltaTime;
             Debug.Log("falling");
-            DeadFall();
+            Fall();
         }
     }
 
@@ -216,7 +226,6 @@ public class Player : MonoBehaviour
     {
         inputBuffer.Dequeue();
     }
-
 
     void Shoot()
     {
@@ -264,17 +273,18 @@ public class Player : MonoBehaviour
 
     }
 
-    void DeadFall()
+    void Fall()
     {
-        if (transform.position.y <= -deadHeight)
+        if (transform.position.y <= deadHeight)
         {
+            Debug.Log("deadfall");
             Death();
         }
     }
 
     public void Death()
     {
-        //Manager.manager.EndGame;
+        Manager.manager.EndGame();
 
         //si se mueve 11 bloques a la izquierda se ha muerto
     }
