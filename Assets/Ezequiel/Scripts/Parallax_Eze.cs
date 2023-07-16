@@ -1,29 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.U2D.IK;
 
 public class Parallax_Eze : MonoBehaviour
 {
 
-    private Manager _manager;
     public float speed = 5f;
-    private float lenght, startpos;
+    private float lenght;
+    private Vector2 startpos;
+    public GameObject cam;
 
     private void Start()
     {
-        startpos = transform.position.x;
+        startpos = transform.position;
+
         lenght = GetComponent<SpriteRenderer>().bounds.size.x;
     }
     private void FixedUpdate()
     {
-        Vector2 newWay = new Vector2(transform.position.x - 1, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, newWay, speed * Time.deltaTime);
+        float dist = cam.transform.position.x;
 
-        if (transform.position.x <= -36.5f)
+        //Vector2 newWay = new Vector2(transform.position.x - 1, transform.position.y);
+        //transform.position = Vector2.MoveTowards(transform.position, newWay, speed * Time.deltaTime);
+
+        //if (transform.position.x <= -120.5f)
+        //{
+        //    transform.position = new Vector3(lenght + startpos, transform.position.y, transform.position.z);
+
+        //}
+        if (Vector3.Distance(transform.position, startpos) >= lenght)
         {
-            transform.position = new Vector3(173 + lenght, transform.position.y, transform.position.z);
 
         }
     }
+
+    //private float startPos;
+    //[SerializeField] Camera cam;
+    //[SerializeField] private float parallaxEffectAmount;
+
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    startPos = transform.position.x;
+    //}
+
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    float distance = (cam.transform.position.x * parallaxEffectAmount);
+    //    transform.position = new Vector3(startPos + distance, transform.position.y, transform.position.z);
+    //}
 }
