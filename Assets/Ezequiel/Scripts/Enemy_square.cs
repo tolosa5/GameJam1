@@ -7,7 +7,8 @@ public class Enemy_square : MonoBehaviour
     private float _speed = 5f;
     public bool touchBullet;
 
-    //private Manager _manager;
+    [SerializeField] AudioSource enemyAudio;
+    [SerializeField] AudioClip deadAudio;
 
     private void Start()
     {
@@ -20,6 +21,8 @@ public class Enemy_square : MonoBehaviour
 
         if (touchBullet)
         {
+            enemyAudio.PlayOneShot(deadAudio, 1.0f);
+
             Destroy(gameObject);
             Manager.manager.scorePoints += 100;
         }
