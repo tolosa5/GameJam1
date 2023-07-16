@@ -411,9 +411,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 75824bd3751e9224780aeb96cb8e9e51, type: 3}
   - {fileID: 8300000, guid: e1d92e05f7f16e34dadeb321f695afa8, type: 3}
   clipsGB:
-  - {fileID: 8300000, guid: 4507839f2bc4f214ead9e2582729a301, type: 3}
-  - {fileID: 8300000, guid: a8cca7e1ebeb5b44c88969f39bb9e418, type: 3}
   - {fileID: 8300000, guid: ad710a8e7fdb74b42819e6bf9ec70912, type: 3}
+  - {fileID: 8300000, guid: 4c5f78b9ff3c07842a1a9838e46707f2, type: 3}
+  - {fileID: 8300000, guid: a8cca7e1ebeb5b44c88969f39bb9e418, type: 3}
+  - {fileID: 8300000, guid: 4507839f2bc4f214ead9e2582729a301, type: 3}
   - {fileID: 8300000, guid: a3cc2c1c1b878d74da9d3defb14cc3b2, type: 3}
   - {fileID: 8300000, guid: 533ed0ce33961c946aed72238366f504, type: 3}
   aS: {fileID: 761214231}
@@ -427,7 +428,7 @@ MonoBehaviour:
   fireRate: 1
   bulletsR: {fileID: 6019763574092349463, guid: dba94cc86657cb342b6b06759c865409, type: 3}
   bulletsL: {fileID: 6019763574092349463, guid: 01dafdaafe6d8a740ae011d10f557008, type: 3}
-  bulletsSprite: {fileID: 0}
+  bulletsSprite: {fileID: 21300000, guid: 020c7695a636aa24e878d96400b11fad, type: 3}
   dashCooldown: 2.5
   dashTime: 0.2
   dashForce: 12
@@ -555,7 +556,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.34
   m_Pitch: 1
   Loop: 0
   Mute: 0
