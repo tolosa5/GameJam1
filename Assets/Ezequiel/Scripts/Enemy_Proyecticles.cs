@@ -15,6 +15,7 @@ public class Enemy_Proyecticles : MonoBehaviour
 
     [SerializeField] AudioSource enemyAudio;
     [SerializeField] AudioClip shootAudio;
+    [SerializeField] AudioClip deadAudio;
     #endregion
 
     private void Start()
@@ -47,6 +48,7 @@ public class Enemy_Proyecticles : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
+            enemyAudio.PlayOneShot(deadAudio, 1.0f);
             Destroy(gameObject);
             Destroy(collision.gameObject);
             Manager.manager.scorePoints += 200;

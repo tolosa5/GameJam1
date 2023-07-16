@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy_MoveLeft : MonoBehaviour
 {
-
+    [SerializeField] AudioSource enemyAudio;
+    [SerializeField] AudioClip deadAudio;
 
     void Update()
     {
@@ -16,6 +17,8 @@ public class Enemy_MoveLeft : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
+            enemyAudio.PlayOneShot(deadAudio, 1.0f);
+
             Destroy(gameObject);
             Destroy(collision.gameObject);
             Manager.manager.scorePoints += 100;

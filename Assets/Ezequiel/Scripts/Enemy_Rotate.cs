@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy_Rotate : MonoBehaviour
 {
-
+    [SerializeField] AudioSource enemyAudio;
+    [SerializeField] AudioClip deadAudio;
     private float _speedRotation = 5f;
 
     void Update()
@@ -18,6 +19,7 @@ public class Enemy_Rotate : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
+            enemyAudio.PlayOneShot(deadAudio, 1.0f);
             Destroy(gameObject);
             Destroy(collision.gameObject);
             Manager.manager.scorePoints += 150;
