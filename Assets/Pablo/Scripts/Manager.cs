@@ -20,6 +20,9 @@ public class Manager : MonoBehaviour
     public float worldSpeed = 1f;
     public bool worldGenerated = false;
     public Transform posStartGeneration;
+    public GameObject goPause;
+    public GameObject goGameOver;
+    private bool pauseActive = false;
 
     private int rand;
 
@@ -51,8 +54,57 @@ public class Manager : MonoBehaviour
     {
         WorldMovement();
         ScoreTime();
+
+        //PauseSystem();
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+
+
+    void OnSceneLoaded(Scene sceneLoad, LoadSceneMode modoCarga)
+    {
+        switch(sceneLoad.name)
+        {
+            default:
+            Debug.Log("Hola");
+            break;
+            case "Menu":
+                Destroy(Player.player.gameObject);
+                Destroy(this.gameObject);
+                break;
+
+        }
+
+    }
+
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
+
+    public void PauseSystem()
+    {
+
+        if(Input.GetKeyDown(KeyCode.Escape) && !pauseActive)
+        {
+            Debug.Log("Pausamos");
+            Time.timeScale = 0;
+            goPause.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            goPause.SetActive(false);
+        }
+
+
+    }
 
     public void OnStartLevel()
     {
@@ -107,6 +159,8 @@ public class Manager : MonoBehaviour
 
     public void EndGame()
     {
+
+        goGameOver.SetActive(true);
 
         
     }

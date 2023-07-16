@@ -171,7 +171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7329533441776543763, guid: b2b81aa69b328654e89afc7e3da4dfdd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -113
+      value: -110
       objectReference: {fileID: 0}
     - target: {fileID: 7329533441776543763, guid: b2b81aa69b328654e89afc7e3da4dfdd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -215,6 +215,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7329533441776543763, guid: b2b81aa69b328654e89afc7e3da4dfdd, type: 3}
   m_PrefabInstance: {fileID: 194148837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &408282437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3293545676932068950, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
+  m_PrefabInstance: {fileID: 1960322206}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1014072616
 GameObject:
@@ -262,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lvlOne:
-  - {fileID: 2535270816231728823, guid: aa26fbab602754f4d987edb310cfe29f, type: 3}
+  - {fileID: 5657374240461192161, guid: e95534373ad4f35488b94620a3977b05, type: 3}
   lvlTwo: []
   lvlThree: []
   GeneratedRooms: []
@@ -272,6 +277,8 @@ MonoBehaviour:
   worldSpeed: 5
   worldGenerated: 1
   posStartGeneration: {fileID: 67702271}
+  goPause: {fileID: 1374294592}
+  goGameOver: {fileID: 408282437}
   scorePoints: 0
 --- !u!1 &1296788885
 GameObject:
@@ -341,6 +348,11 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &1374294592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3293545676588537448, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
+  m_PrefabInstance: {fileID: 1960322206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1931497659
 PrefabInstance:
   m_ObjectHideFlags: 0

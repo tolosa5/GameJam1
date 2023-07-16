@@ -17,11 +17,15 @@ public class Loading : MonoBehaviour
    
     private void Start()
     {
+        loaded = false;
         string LoadLvL = SceneLoad.nextLVL;
         StartCoroutine(StartLoad(LoadLvL));
         btnReadyToPlay.onClick.AddListener(delegate
         {
-            operation.allowSceneActivation = true;
+            if(loaded)
+            {
+                operation.allowSceneActivation = true;
+            }
         });
 
         switch(LoadLvL)
@@ -46,12 +50,14 @@ public class Loading : MonoBehaviour
 
     IEnumerator StartLoad(string NextScene)
     {
-        yield return new WaitForSeconds(1f); //De momento esto para que dure la pantalla de carga
         
         operation = SceneManager.LoadSceneAsync(NextScene);
         
+
+
         operation.allowSceneActivation = false;
 
+        
         while (!operation.isDone)
         {
 
@@ -60,6 +66,7 @@ public class Loading : MonoBehaviour
                 loaded = true;
                 btnReadyToPlay.gameObject.SetActive(true);
             }
+
             yield return null;
         }
     }
