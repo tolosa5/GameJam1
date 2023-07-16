@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &63693040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3293545677275566574, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
+  m_PrefabInstance: {fileID: 1960322206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &67702270
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +165,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &116583780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3293545675992140711, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
+  m_PrefabInstance: {fileID: 1960322206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &194148837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,19 +289,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lvlOne:
-  - {fileID: 5657374240461192161, guid: e95534373ad4f35488b94620a3977b05, type: 3}
-  lvlTwo: []
+  - {fileID: 2535270816231728823, guid: 7b9e5fd83b931eb4a8dd5dbf6a3834f3, type: 3}
+  - {fileID: 2535270816231728823, guid: aa26fbab602754f4d987edb310cfe29f, type: 3}
+  - {fileID: 2535270816231728823, guid: 1c9e238dfcde62d458f28fc5957faf6f, type: 3}
+  - {fileID: 2535270816231728823, guid: 7793c428302282c45a2956309771cb45, type: 3}
+  - {fileID: 2535270816231728823, guid: 291c9c8536e8c0d4c9744a746b7e2184, type: 3}
+  - {fileID: 2535270816231728823, guid: 57934bd2ed8af294381cd929ca1b917d, type: 3}
+  - {fileID: 2535270816231728823, guid: c065f42e717b2cc4eb76b5fe74f9dcf5, type: 3}
+  - {fileID: 2535270816231728823, guid: ab77f39391305f24e96287734e63831e, type: 3}
+  lvlTwo:
+  - {fileID: 2535270816231728823, guid: 79a8e4f2bc1b84e41b322199518a3c5e, type: 3}
+  - {fileID: 2535270816231728823, guid: 7239f77828a37274fab2f544e69b56ab, type: 3}
+  - {fileID: 2535270816231728823, guid: 2f717ce0fab67c644a355706064591b0, type: 3}
+  - {fileID: 2535270816231728823, guid: 21896dca2e5ec81439b34ff5849e60e5, type: 3}
+  - {fileID: 2535270816231728823, guid: ca64ebda30ec59744b46b98e14e5f43b, type: 3}
+  - {fileID: 2535270816231728823, guid: c6b4c8b34d4d39345bd7cd1982bcb6b8, type: 3}
+  - {fileID: 2535270816231728823, guid: b2fd0adb6226cae4496322126483c3fc, type: 3}
+  - {fileID: 2535270816231728823, guid: c12693279aaab384e85061e94b4e9ca3, type: 3}
   lvlThree: []
   GeneratedRooms: []
-  goPortal: {fileID: 1704411262040489308, guid: e1287f80ff7b3b34593fff2fa75a18c9, type: 3}
-  limiteRooms: 0
+  goPortal: {fileID: 7352743585356564732, guid: 5dee9d910ee3c8f4798eb040a06135ca, type: 3}
+  limiteRooms: 2
   actualLevel: 1
   worldSpeed: 5
   worldGenerated: 1
   posStartGeneration: {fileID: 67702271}
   goPause: {fileID: 1374294592}
   goGameOver: {fileID: 408282437}
+  goNivel1HUD: {fileID: 1960322209}
+  goNivel2HUD: {fileID: 1960322208}
   scorePoints: 0
+  textScore:
+  - {fileID: 63693040}
+  - {fileID: 116583780}
 --- !u!1 &1296788885
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,5 +556,15 @@ PrefabInstance:
 --- !u!224 &1960322207 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3293545677167215275, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
+  m_PrefabInstance: {fileID: 1960322206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1960322208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3293545675490482772, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
+  m_PrefabInstance: {fileID: 1960322206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1960322209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3293545677182494510, guid: 1cf2873341aab4e7ca702f70849541ba, type: 3}
   m_PrefabInstance: {fileID: 1960322206}
   m_PrefabAsset: {fileID: 0}

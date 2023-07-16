@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
@@ -22,11 +23,15 @@ public class Manager : MonoBehaviour
     public Transform posStartGeneration;
     public GameObject goPause;
     public GameObject goGameOver;
+    public GameObject goNivel1HUD;
+    public GameObject goNivel2HUD;
     private bool pauseActive = false;
 
     private int rand;
 
     public float scorePoints;
+    public Text[] textScore;
+    private int actualText = 0;
 
 
     private void Awake()
@@ -55,6 +60,7 @@ public class Manager : MonoBehaviour
         WorldMovement();
         ScoreTime();
 
+        
         //PauseSystem();
     }
     private void OnEnable()
@@ -72,8 +78,29 @@ public class Manager : MonoBehaviour
             Debug.Log("Hola");
             break;
             case "Menu":
+                actualText = 0;
                 Destroy(Player.player.gameObject);
                 Destroy(this.gameObject);
+                break;
+            case "Nivel1":
+                goNivel1HUD.SetActive(true);
+                goNivel2HUD.SetActive(false);
+
+                break;
+            
+            case "Nivel2":
+                actualText++;
+                Player.player.transform.position = new Vector3(-110f,0,0);
+                Manager.manager.limiteRooms++;
+                goNivel1HUD.SetActive(false);
+                goNivel2HUD.SetActive(true);
+                if(posStartGeneration == null)
+                {
+                    posStartGeneration = GameObject.Find("RoomsManager").GetComponent<Transform>();
+                }
+
+
+                OnStartLevel();
                 break;
 
         }
@@ -143,7 +170,7 @@ public class Manager : MonoBehaviour
         Debug.Log("Cambio Escena");
         GeneratedRooms.Clear();
         SceneManager.LoadScene("Nivel2");
-       // OnStartLevel();
+        
 
     }
 
@@ -169,6 +196,15 @@ public class Manager : MonoBehaviour
     {
         
         scorePoints += Time.deltaTime * 10;
+        if(actualText==0)
+        {
+            textScore[actualText].text =  "Score: " + (int)scorePoints;
+        }
+        else
+        {
+            textScore[actualText].text = "" + (int)scorePoints;
+        }
+ 
 
     }
 

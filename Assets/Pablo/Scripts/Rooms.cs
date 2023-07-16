@@ -84,6 +84,7 @@ public class Rooms : MonoBehaviour
 
                 Manager.manager.actualLevel++;
                 
+                
                 Debug.Log("End of Generate World");
 
 
