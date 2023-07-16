@@ -9,6 +9,7 @@ public class Loading : MonoBehaviour
 
    // [SerializeField] private Slider sliderLoading;
     public Button btnReadyToPlay;
+    public Button btnReadyToPlay2;
     public GameObject nivel1;
     public GameObject nivel2;
     AsyncOperation operation;
@@ -27,8 +28,15 @@ public class Loading : MonoBehaviour
                 operation.allowSceneActivation = true;
             }
         });
+        btnReadyToPlay2.onClick.AddListener(delegate
+        {
+            if (loaded)
+            {
+                operation.allowSceneActivation = true;
+            }
+        });
 
-        switch(LoadLvL)
+        switch (LoadLvL)
         {
             default:
             case "Nivel1":
@@ -64,7 +72,7 @@ public class Loading : MonoBehaviour
             if (operation.progress >= 0.9f)
             {
                 loaded = true;
-                btnReadyToPlay.gameObject.SetActive(true);
+              //  btnReadyToPlay.gameObject.SetActive(true);
             }
 
             yield return null;
