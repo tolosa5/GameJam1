@@ -20,6 +20,8 @@ public class Enemy_Rotate : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            Manager.manager.scorePoints += 150;
+
         }
     }
 }

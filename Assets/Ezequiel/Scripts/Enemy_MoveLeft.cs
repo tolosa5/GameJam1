@@ -18,6 +18,8 @@ public class Enemy_MoveLeft : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            Manager.manager.scorePoints += 100;
+
 
         }
     }

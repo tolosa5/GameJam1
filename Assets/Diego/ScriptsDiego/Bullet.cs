@@ -13,4 +13,12 @@ public class Bullet : MonoBehaviour
         if (lifetime <= 0)
             Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Shield"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

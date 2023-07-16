@@ -21,7 +21,7 @@ public class Enemy_square : MonoBehaviour
         if (touchBullet)
         {
             Destroy(gameObject);
-
+            Manager.manager.scorePoints += 100;
         }
     }
 

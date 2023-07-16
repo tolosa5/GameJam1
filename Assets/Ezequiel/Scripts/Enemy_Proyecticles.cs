@@ -13,6 +13,8 @@ public class Enemy_Proyecticles : MonoBehaviour
     [SerializeField] Transform pointInstance;
     [SerializeField] Sprite[] bulletsSprite; //cambiar el sprite de las balas segun el nivel en el que se esta
 
+    [SerializeField] AudioSource enemyAudio;
+    [SerializeField] AudioClip shootAudio;
     #endregion
 
     private void Start()
@@ -27,6 +29,7 @@ public class Enemy_Proyecticles : MonoBehaviour
         if (_isAttacking == false)
         {
             StartCoroutine(Shoot());
+            enemyAudio.PlayOneShot(shootAudio, 1.0f); ;
             _isAttacking = true;
         }
 
@@ -37,6 +40,16 @@ public class Enemy_Proyecticles : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Instantiate(bullets, pointInstance.transform.position + Vector3.right * 1f, Quaternion.identity);
         _isAttacking = false;
-        //lastShoot = 0;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+            Manager.manager.scorePoints += 200;
+
+        }
     }
 }
