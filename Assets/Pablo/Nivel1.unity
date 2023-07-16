@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 761214231, guid: b2b81aa69b328654e89afc7e3da4dfdd, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7329533441776543761, guid: b2b81aa69b328654e89afc7e3da4dfdd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -263,7 +267,7 @@ GameObject:
   - component: {fileID: 353161985}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: CameraKill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
