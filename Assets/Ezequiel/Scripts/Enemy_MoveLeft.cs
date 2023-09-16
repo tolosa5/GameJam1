@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy_MoveLeft : MonoBehaviour
 {
     [SerializeField] AudioSource enemyAudio;
     [SerializeField] AudioClip deadAudio;
+
+    [SerializeField] GameObject texpuntos;
 
     void Update()
     {
@@ -18,7 +21,8 @@ public class Enemy_MoveLeft : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             enemyAudio.PlayOneShot(deadAudio, 1.0f);
-
+            GameObject newpuntaje = Instantiate(texpuntos, gameObject.transform.position, Quaternion.identity);
+            Destroy(newpuntaje, 1);
             Destroy(gameObject);
             Destroy(collision.gameObject);
             Manager.manager.scorePoints += 100;
